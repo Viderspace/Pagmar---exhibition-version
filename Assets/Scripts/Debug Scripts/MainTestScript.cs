@@ -5,6 +5,7 @@ using Scriptable_Objects;
 using Synth_Variables;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Kernel.Tests
 {
@@ -55,6 +56,22 @@ namespace Kernel.Tests
             KeyCode.Alpha9,
             KeyCode.Alpha0
         };
+
+        private void CheckReloadScene()
+        {
+            if (Input.GetKeyDown(KeyCode.R) && Input.GetKey(KeyCode.LeftShift))
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+        }
+
+        private void CheckQuitApp()
+        {
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
+        }
 
 
         private void Update()
@@ -126,6 +143,9 @@ namespace Kernel.Tests
             {
                 InputManager.OnPhoneHangup();
             }
+            
+            CheckReloadScene();
+            CheckQuitApp();
 
         }
         

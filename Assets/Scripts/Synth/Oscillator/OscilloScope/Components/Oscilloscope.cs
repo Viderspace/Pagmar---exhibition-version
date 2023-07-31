@@ -1,8 +1,10 @@
 using System;
 using Lasp;
 using Synth_Variables;
+using TMPro;
 using Unity.Collections;
 using UnityEngine;
+using UnityEngine.XR;
 using Utils;
 
 // namespace Synth.Oscillator.OscilloScope.Components
@@ -118,21 +120,18 @@ namespace Synth.Oscillator.OscilloScope.Components
     public class Oscilloscope : MonoBehaviour
     {
         #region Inspector
-
+        public TMP_Text debugWindow;
         [Header("Shader Parameters")] [SerializeField] [Tooltip("Adjust this to increase/decrease the detail")]
         private int sampleSize = 512;
         [SerializeField] Material material;
         [SerializeField] [Range(0f, 10f)] private float lineWidth = 2f;
         [SerializeField] private Color lineColor = Color.white;
-        [SerializeField] private float shrinkFactor = 1;
 
         [Header("Components & Monitoring Parameters")] 
         [SerializeField]
         private ComputeShader computeShader;
-        // [field: SerializeReference] private ;
 
         [SerializeField] private FloatVariable MaxAmp;
-        // [field: SerializeReference] private float MinAmp { get; set; }
 
         #endregion
 
@@ -148,6 +147,7 @@ namespace Synth.Oscillator.OscilloScope.Components
         [SerializeField] private  RenderTexture _renderTexture;
 
         private int _kernel;
+        Lasp.InputStream _stream;
 
         #endregion
 
@@ -159,12 +159,39 @@ namespace Synth.Oscillator.OscilloScope.Components
 
 
         #endregion
+
+        private string DeviceInfo;
+
+        private InputStream FindInputDevice()
+        {
+            foreach (var device in Lasp.AudioSystem.InputDevices)
+            {
+                if (device.Name.Contains("BlackHole"))
+                {
+                    print("found blackhole device");
+                    DeviceInfo ="Device: "+ device.Name +" Channels: "+ device.ChannelCount + " Is Valid: " + device.IsValid +
+                                " ID: " + device.ID;
+                    return Lasp.AudioSystem.GetInputStream(device);
+                }
+            }
+
+            return null;
+        }
+        
+        public void ChangeDevice(InputStream stream, DeviceDescriptor device)
+        {
+            DeviceInfo ="Device: "+ device.Name +" Channels: "+ device.ChannelCount + " Is Valid: " + device.IsValid +
+                        " ID: " + device.ID;
+            _stream = stream;
+        }
+ 
         
 
         void Awake()
         {
             _simplerAudioBuffer = new SimplerAudioBuffer(sampleSize, MaxAmp);
             // Create a new buffer with the same size as the audio samples
+            _stream = FindInputDevice();
 
             _reaktorStream = GetComponent<AudioLevelTracker>();
             _audioBuffer = new AudioBuffer(sampleSize);
@@ -195,26 +222,48 @@ namespace Synth.Oscillator.OscilloScope.Components
         {
             // DrawSpectrum();
             Prepare();
-            if (_audioBuffer.Full)
+            // if (_audioBuffer.Full)
+            if (!_simplerAudioBuffer.IsEmpty)
+
             {
                 RefreshShader();
             }
+        }
+
+        private void DebugLasp(NativeSlice<float> slice)
+        {
+            if (slice.Length < 32)
+            {
+                debugWindow.text = DeviceInfo+ "\n\n"+ "Slice length = " + slice.Length;
+                return;
+            }
+
+            string msg = DeviceInfo + "\n\n";
+            msg += "Lasp: NormalizedLevel = " + _stream.GetChannelLevel(0) + "\n";
+            msg += "MaxAmp: = " + MaxAmp.Value + "\n";
+            msg += "Input slice : ";
+            
+             for (int i=0; i<32; i++)
+            {
+                msg += slice[i] + " ";
+            }
+            
+            debugWindow.text = msg;
         }
         
         void RefreshShader()
         {
             // Set the buffer data
-            _buffer.SetData(_simplerAudioBuffer.GetBuffer());
+            var slice = _simplerAudioBuffer.GetBuffer();
+            _buffer.SetData(slice);
             // _buffer.SetData(_audioBuffer._CleanBuff);
 
             // Set the shader parameters
             computeShader.SetBuffer(_kernel, "audioData", _buffer);
-            // computeShader.SetTexture(_kernel, "Result", _renderTexture);
-
-            // var minmaxAmp = _audioBuffer.GetMinMaxAmp();
-            // MinAmp = minmaxAmp.x;
-            // MaxAmp = minmaxAmp.y;
+ 
             MaxAmp.Value = _audioBuffer.GetMaxAmp();
+            // MaxAmp.Value = _simplerAudioBuffer.
+
             computeShader.SetFloat("amp", MaxAmp.Value);
 
             // Execute the shader
@@ -224,7 +273,8 @@ namespace Synth.Oscillator.OscilloScope.Components
 
         private void Prepare()
         {
-            var slice = Stream.audioDataSlice;
+            var slice = _stream.GetChannelDataSlice(0);
+            DebugLasp(slice);
             _simplerAudioBuffer.PushAndProcess(slice);
             _audioBuffer.Push(slice);
             _audioBuffer.ZSync();

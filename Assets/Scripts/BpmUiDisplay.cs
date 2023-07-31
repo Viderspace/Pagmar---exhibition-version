@@ -20,7 +20,7 @@ public class BpmUiDisplay : MonoBehaviour
 
     private void Start()
     {
-        text.color = DefaultColor;
+        text.color = DesignPalette.WhiteYellowish;
     }
 
     private void OnEnable()

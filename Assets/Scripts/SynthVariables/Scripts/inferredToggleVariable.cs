@@ -1,5 +1,6 @@
 using System;
 using Synth_Variables.Native_Types;
+using SynthVariables.Scripts;
 
 namespace Synth_Variables.Scripts
 {

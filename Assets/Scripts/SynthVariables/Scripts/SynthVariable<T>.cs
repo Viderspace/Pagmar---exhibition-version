@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Synth_Variables
+namespace SynthVariables.Scripts
 {
     public abstract class SynthVariable<T> : ScriptableObject 
     {

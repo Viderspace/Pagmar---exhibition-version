@@ -1,4 +1,5 @@
 using System;
+using SynthVariables.Scripts;
 using UnityEngine;
 
 namespace Synth_Variables.Scripts

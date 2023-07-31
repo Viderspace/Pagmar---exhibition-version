@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using Synth.Oscillator.OscilloScope.Components;
 
 //
 // Runtime device selection and AudioLevelTracker instantiation example
@@ -14,10 +15,10 @@ using System.Linq;
 sealed class DeviceSelector : MonoBehaviour
 {
     #region Scene object references
-
+    [SerializeField] Oscilloscope _oscilloscope = null;
     [SerializeField] Dropdown _deviceList = null;
     [SerializeField] Dropdown _channelList = null;
-    [SerializeField] Transform _targetTransform = null;
+    // [SerializeField] Transform _targetTransform = null;
 
     #endregion
 
@@ -112,6 +113,7 @@ sealed class DeviceSelector : MonoBehaviour
         //
         _tracker = gameObject.AddComponent<Lasp.AudioLevelTracker>();
         _tracker.deviceID = dev.ID;
+        _oscilloscope.ChangeDevice(Lasp.AudioSystem.GetInputStream(dev), dev);
 
         //
         // Add a property binder to the tracker that controls the scale of the
@@ -120,7 +122,7 @@ sealed class DeviceSelector : MonoBehaviour
         _tracker.propertyBinders =
           new [] {
             new Lasp.Vector3PropertyBinder {
-              Target = _targetTransform,
+              // Target = _targetTransform,
               PropertyName = "localScale",
               Value0 = Vector3.zero,
               Value1 = Vector3.one

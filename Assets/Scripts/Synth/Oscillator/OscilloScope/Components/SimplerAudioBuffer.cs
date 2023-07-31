@@ -15,17 +15,17 @@ namespace Synth.Oscillator.OscilloScope.Components
         public bool IsFull => data.Count >= MaxCap -1;
         public bool IsEmpty => data.Count < buffersize;
 
-        private void FindPeakAmplitude()
-        {
-            float max = 0;
-            foreach (var sample in data)
-            {
-                max = Mathf.Abs(sample) > max ? sample : max;
-            }
-            
-            if (PeakAmp.Value == 0) PeakAmp.Value = max;
-            PeakAmp.Value = 0.9f*PeakAmp.Value + 0.1f*max;
-        }
+        // private void FindPeakAmplitude()
+        // {
+        //     float max = 0;
+        //     foreach (var sample in data)
+        //     {
+        //         max = Mathf.Abs(sample) > max ? sample : max;
+        //     }
+        //     
+        //     if (PeakAmp.Value == 0) PeakAmp.Value = max;
+        //     PeakAmp.Value = max;
+        // }
         
         public SimplerAudioBuffer(int size, FloatVariable peakAmplitudeRef)
         {
@@ -40,7 +40,7 @@ namespace Synth.Oscillator.OscilloScope.Components
             if (IsEmpty) return;
             ZSync();
             
-            FindPeakAmplitude();
+            // FindPeakAmplitude();
         }
 
 
