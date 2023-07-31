@@ -1,0 +1,146 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &707578035017711567
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 707578035017711565}
+  - component: {fileID: 707578035017711564}
+  m_Layer: 0
+  m_Name: Timeline
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &707578035017711565
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 707578035017711567}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 707578035477479972}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!320 &707578035017711564
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 707578035017711567}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 19fd6283b3cd4450791ea596d871f94e, type: 2}
+  m_InitialState: 0
+  m_WrapMode: 0
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: -2518958352236181826, guid: 19fd6283b3cd4450791ea596d871f94e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 183743395408615839, guid: 19fd6283b3cd4450791ea596d871f94e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 711845253986655617, guid: 19fd6283b3cd4450791ea596d871f94e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 1060836109870010732, guid: 19fd6283b3cd4450791ea596d871f94e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -2074479233740812745, guid: 19fd6283b3cd4450791ea596d871f94e, type: 2}
+    value: {fileID: 707578035477479974}
+  - key: {fileID: 8029363393914527893, guid: 19fd6283b3cd4450791ea596d871f94e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2955865660387505079, guid: 19fd6283b3cd4450791ea596d871f94e, type: 2}
+    value: {fileID: 0}
+  m_ExposedReferences:
+    m_References:
+    - de1843a89677f44dfad876db4852c823: {fileID: 0}
+    - 7a1c4de7f02bf4fdc831104d6c3d30c9: {fileID: 0}
+    - 88fb0ecbea5fb489b962010d7ed98163: {fileID: 0}
+--- !u!1 &707578035477479993
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 707578035477479972}
+  - component: {fileID: 707578035477479975}
+  - component: {fileID: 707578035477479974}
+  m_Layer: 0
+  m_Name: Timeline Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &707578035477479972
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 707578035477479993}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 767.92413, y: 228.27057, z: -10.107701}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 707578035017711565}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &707578035477479975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 707578035477479993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b855fa8df31a46d1836b0b37f368d10e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playableDirector: {fileID: 707578035017711564}
+  settings: {fileID: 11400000, guid: a92ad99ae9ede4e5593332f28e906157, type: 2}
+--- !u!114 &707578035477479974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 707578035477479993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 4f652511a6a404fd68150212cdd0112c, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 707578035477479975}
+          m_TargetAssemblyTypeName: Act_System.Main_System.TimelineController, Assembly-CSharp
+          m_MethodName: ResetToNormalPayphone
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2

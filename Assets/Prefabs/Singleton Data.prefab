@@ -1,0 +1,114 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2123819188709547679
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2123819188709547677}
+  - component: {fileID: 2123819188709547676}
+  m_Layer: 0
+  m_Name: Singleton Data
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2123819188709547677
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2123819188709547679}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 577.62354, y: 438.2303, z: -1.3253485}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6119040184256005974}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2123819188709547676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2123819188709547679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92b69b1cf2809405fb72b806ba850ef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  synthData: {fileID: 11400000, guid: e194753724aa44a0db1a270eb5e48cb0, type: 2}
+  telephoneSettings: {fileID: 11400000, guid: ef823aa9e7350436db3fa0c6a7a0ee1e, type: 2}
+  cheatCodes: {fileID: 11400000, guid: 597929f01be3b43ec8c585a55795a425, type: 2}
+  audioFx: {fileID: 11400000, guid: 9cd47f4647e1f434eab2217153d99148, type: 2}
+  terminalTextSettings: {fileID: 11400000, guid: 67a0736c0a9b4475e82ba19b758b2ab3, type: 2}
+--- !u!1001 &1574834453
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2123819188709547677}
+    m_Modifications:
+    - target: {fileID: 6119040185670145603, guid: 7053c32d6fe754291bd8b97a243b89e4, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6119040185670145603, guid: 7053c32d6fe754291bd8b97a243b89e4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6119040185670145603, guid: 7053c32d6fe754291bd8b97a243b89e4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6119040185670145603, guid: 7053c32d6fe754291bd8b97a243b89e4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6119040185670145603, guid: 7053c32d6fe754291bd8b97a243b89e4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6119040185670145603, guid: 7053c32d6fe754291bd8b97a243b89e4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6119040185670145603, guid: 7053c32d6fe754291bd8b97a243b89e4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6119040185670145603, guid: 7053c32d6fe754291bd8b97a243b89e4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6119040185670145603, guid: 7053c32d6fe754291bd8b97a243b89e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6119040185670145603, guid: 7053c32d6fe754291bd8b97a243b89e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6119040185670145603, guid: 7053c32d6fe754291bd8b97a243b89e4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6119040185670145605, guid: 7053c32d6fe754291bd8b97a243b89e4, type: 3}
+      propertyPath: m_Name
+      value: Audio SFX
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7053c32d6fe754291bd8b97a243b89e4, type: 3}
+--- !u!4 &6119040184256005974 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6119040185670145603, guid: 7053c32d6fe754291bd8b97a243b89e4, type: 3}
+  m_PrefabInstance: {fileID: 1574834453}
+  m_PrefabAsset: {fileID: 0}

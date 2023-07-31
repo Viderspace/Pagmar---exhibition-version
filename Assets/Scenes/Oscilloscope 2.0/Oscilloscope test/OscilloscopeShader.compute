@@ -1,0 +1,74 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CSMain
+
+// Create a RenderTexture with enableRandomWrite flag and set it
+// with cs.SetTexture
+RWTexture2D<float4> Result;
+RWBuffer<float> audioData;
+
+// visual properties
+int resolution = 512;
+float lineWidth = 1;
+float shrinkFactor =1;
+float maxAmp = 1;
+float minAmp = -1;
+float ampRange = 1;
+float4 lineColor = float4(1,1,1,1);
+
+
+
+// [numthreads(8,8,1)]
+// void CSMain (uint3 id : SV_DispatchThreadID)
+// {
+//     // TODO: insert actual code here!
+//
+//     Result[id.xy] = float4(id.x & id.y, (id.x & 15)/15.0, (id.y & 15)/15.0, 0.0);
+// }
+
+[numthreads(8,8,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+    const float x1 = (float)(id.x - 1);
+    const float x2 = (float)(id.x + 1);
+    const float y1 = (audioData[(int)x1] * resolution * ampRange ) + resolution / 2;
+    const float y2 = (audioData[(int)x2] * resolution * ampRange) + resolution / 2;
+    const float m = (y1 - y2) / (x1 - x2);
+    const float n = y1 - m * x1;
+
+    const float dist = abs(m * (float)id.x - (float)id.y + n) / sqrt(m * m + 1);
+    const bool isCloseEnoughToLine = dist <= lineWidth && abs(m) < 200 && abs(m) > 0.00001;
+
+    const float ceil = (1 + max(maxAmp, ampRange)) * resolution / 2;
+    const float floor = (1 + min(minAmp, -ampRange)) * resolution / 2;
+    const bool outsideBounds = id.x <= 0 || id.x >= resolution - 1 || (float)id.y < floor || (float)id.y > ceil;
+
+    if (outsideBounds)
+    {
+        Result[id.xy] = float4(0, 0, 0, 0);
+        return;
+    }
+
+    const bool audioIsSilent = maxAmp <= 0.001;
+
+    if (audioIsSilent)
+    {
+        if ((float)id.y - resolution / 2 < lineWidth && (float)id.y - resolution / 2 > -lineWidth)
+        {
+            Result[id.xy] = lineColor; // White line
+        }
+        else
+        {
+            Result[id.xy] = float4(0, 0, 0, 0); // Black background
+        }
+        return;
+    }
+
+    if (isCloseEnoughToLine)
+    {
+        Result[id.xy] = lineColor; //  line color
+    }
+    else
+    {
+        Result[id.xy] = float4(0, 0, 0, 0); // Black background
+    }
+}

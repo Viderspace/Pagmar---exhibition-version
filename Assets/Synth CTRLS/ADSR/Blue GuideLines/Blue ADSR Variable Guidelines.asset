@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e47f59eff78421ca8064080a7f879c7, type: 3}
+  m_Name: Blue ADSR Variable Guidelines
+  m_EditorClassIdentifier: 
+  attack: {fileID: 11400000, guid: 6eaa8e0945cad4d66a8b097b1f00ddcc, type: 2}
+  decay: {fileID: 11400000, guid: 3db31415f4f3543f19ef1d1c8d1efd2e, type: 2}
+  sustain: {fileID: 11400000, guid: 2394fcbe4d95c4de98f09c64972f2335, type: 2}
+  release: {fileID: 11400000, guid: 072db17a02e0042d984d9a30d08beb25, type: 2}

@@ -1,0 +1,62 @@
+#pragma kernel DrawAudioWaveform
+
+RWTexture2D<float4> Result;
+
+// The audio data that we will visualize
+RWBuffer<float> audioData;
+
+uint width = 0;
+uint height =0;
+float lineWidth = 1;
+float maxAmp = 1;
+float minAmp = -1;
+float ampRange = 1;
+float4 lineColor = float4(1,1,1,1);
+
+[numthreads(8,8,1)]
+void DrawAudioWaveform(uint3 id : SV_DispatchThreadID)
+{
+    const float x1 = (float)(id.x - 1);
+    const float x2 = (float)(id.x + 1);
+    const float y1 = (audioData[(int)x1] * height * ampRange ) + height / 2;
+    const float y2 = (audioData[(int)x2] * height * ampRange) + height / 2;
+    const float m = (y1 - y2) / (x1 - x2);
+    const float n = y1 - m * x1;
+
+    const float dist = abs(m * (float)id.x - (float)id.y + n) / sqrt(m * m + 1);
+    const bool isCloseEnoughToLine = dist <= lineWidth && abs(m) < 200 && abs(m) > 0.00001;
+
+    const float ceil = (1 + max(maxAmp, ampRange)) * height / 2;
+    const float floor = (1 + min(minAmp, -ampRange)) * height / 2;
+    const bool outsideBounds = id.x <= 0 || id.x >= width - 1 || (float)id.y < floor || (float)id.y > ceil;
+
+    if (outsideBounds)
+    {
+        Result[id.xy] = float4(0, 0, 0, 0);
+        return;
+    }
+
+    const bool audioIsSilent = maxAmp <= 0.001;
+
+    if (audioIsSilent)
+    {
+        if ((float)id.y - height / 2 < lineWidth && (float)id.y - height / 2 > -lineWidth)
+        {
+            Result[id.xy] = lineColor; // White line
+        }
+        else
+        {
+            Result[id.xy] = float4(0, 0, 0, 0); // Black background
+        }
+        return;
+    }
+
+    if (isCloseEnoughToLine)
+    {
+        Result[id.xy] = lineColor; //  line color
+    }
+    else
+    {
+        Result[id.xy] = float4(0, 0, 0, 0); // Black background
+    }
+}

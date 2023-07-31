@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c96d2257bd4342fcb9525fb04142fc72, type: 3}
+  m_Name: ValidationProcess
+  m_EditorClassIdentifier: 
+  programCommands:
+  - rid: 1018593351611449344
+  - rid: 1018593351611449345
+  - rid: 1018593351611449346
+  - rid: 1018593676869763076
+  - rid: 1018593351611449347
+  - rid: 1018593351611449348
+  - rid: 1018593351611449349
+  references:
+    version: 2
+    RefIds:
+    - rid: 1018593351611449344
+      type: {class: PauseCommand, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        pauseTime: 0.5
+    - rid: 1018593351611449345
+      type: {class: ReadTextFromFile, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        file: {fileID: 4900000, guid: bfdfe7c02be84c08a597cb03bb2189fc, type: 3}
+    - rid: 1018593351611449346
+      type: {class: PauseCommand, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        pauseTime: 1
+    - rid: 1018593351611449347
+      type: {class: MorpheusText, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        startInNewLine: 0
+        morpheusMassage: '****'
+        _speed: 0
+        prefixTagColor: 3
+    - rid: 1018593351611449348
+      type: {class: StylizedText, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        startInNewLine: 1
+        text: '----------------------------------
+
+          >>  PASSWORD INPUT RECEIVED
+
+          ----------------------------------
+
+          ...
+
+
+          Validating
+          Password...'
+        typeSpeed: 4
+        textColor: 0
+    - rid: 1018593351611449349
+      type: {class: PauseCommand, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        pauseTime: 2.5
+    - rid: 1018593676869763076
+      type: {class: StylizedText, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        startInNewLine: 1
+        text: 'Payphone serial-id: '
+        typeSpeed: 3
+        textColor: 0

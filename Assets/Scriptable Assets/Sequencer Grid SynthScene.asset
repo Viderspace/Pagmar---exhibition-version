@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4479c4c14a5494c7985c6a057ae246fd, type: 3}
+  m_Name: Sequencer Grid SynthScene
+  m_EditorClassIdentifier: 
+  sequencerMode: {fileID: 11400000, guid: eeaa4ea3ed5e14afbb703f2195a6701d, type: 2}
+  buttonPrefab: {fileID: 7011310732838860245, guid: b53c3b8b91d3a465ca2735a4b731d673, type: 3}
+  parent: {fileID: 0}
+  Cursor: {fileID: 0}
+  lowerLeftCorner: {fileID: 0}
+  bound:
+    serializedVersion: 2
+    x: -496.4657
+    y: -103.406815
+    width: 992.9314
+    height: 206.81363

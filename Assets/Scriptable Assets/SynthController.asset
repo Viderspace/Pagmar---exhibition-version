@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ebffc84af2b41a3acab8cbaaf1e55ea, type: 3}
+  m_Name: SynthController
+  m_EditorClassIdentifier: 
+  OscillatorOnOffSwitch: {fileID: 11400000, guid: e068f4e29ffd346818f4d064a04ce9db, type: 2}
+  ActivePitchMode: {fileID: 11400000, guid: 146fca96a5f96456fab22e6849738bd1, type: 2}
+  Octave: {fileID: 11400000, guid: 518d12d3c34154a15a730d4436a81081, type: 2}
+  ActiveWaveShape: {fileID: 11400000, guid: b43693a6ae12648029e03bd4bde2a810, type: 2}
+  SequencerOnOffSwitch: {fileID: 11400000, guid: 2918f1d82f24a4c0993be278d4b5d02b, type: 2}
+  SequencerMode: {fileID: 11400000, guid: eeaa4ea3ed5e14afbb703f2195a6701d, type: 2}
+  Bpm: {fileID: 11400000, guid: 8dd79af1b4e31465f8e714e3e81c19db, type: 2}
+  FilterOnOffSwitch: {fileID: 11400000, guid: 5577a28e032314f17aa0ee603b73456e, type: 2}
+  CutoffOffset: {fileID: 11400000, guid: dd8431c5fa669433babeed5970de344f, type: 2}
+  AdsrOnOffSwitch: {fileID: 11400000, guid: 3a1176b0323b8486f857a0c5aa788766, type: 2}
+  GlobalAdsr: {fileID: 11400000, guid: 97208847592394add9a67d3a3ba5059c, type: 2}

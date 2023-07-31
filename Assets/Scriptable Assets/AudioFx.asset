@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 361955b539df40a0ac1f63f9a85c5125, type: 3}
+  m_Name: AudioFx
+  m_EditorClassIdentifier: 
+  SfxMixer: {fileID: 24100000, guid: ce437cc6abd364660b64c63e96986784, type: 2}
+  keystrokeLatency: 0.1
+  ringingPhoneSoundClip: {fileID: 8300000, guid: 50883b1f5f2104c70ab94facc15d0687, type: 3}
+  singleTypeSoundClip: {fileID: 8300000, guid: 99b2290808ae94471a478f4191fad01d, type: 3}
+  doubleTypeSoundClip: {fileID: 8300000, guid: fc3a1ec106d964a7fa796044a67708e9, type: 3}
+  enterSoundClip: {fileID: 8300000, guid: 7ae8e2edbc167454fbba668c7803f28b, type: 3}
+  digitalKeystrokesSequence: {fileID: 8300000, guid: fb8b871e4847f4f8d8da87d75eb1e028, type: 3}
+  glitchSoundClip: {fileID: 8300000, guid: fd103c32f54314b6cbe398171e183b28, type: 3}
+  eventNotificationSoundClip: {fileID: 8300000, guid: 684e8dbea22ae4b4a8ef85966cb2da9f, type: 3}
+  backgroundProcessSoundClip: {fileID: 8300000, guid: 854fe7059767e48268d9fa9f4100f17f, type: 3}
+  smallImpact: {fileID: 8300000, guid: c81c1e0d1a08f476296d35ee191dcb5e, type: 3}
+  pluginArm: {fileID: 8300000, guid: 5d4c4f99d04a1410ba76ca77e1960565, type: 3}
+  fxVolume: 0.473
+  keystrokeVolume: 0.63

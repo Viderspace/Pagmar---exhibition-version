@@ -1,0 +1,26 @@
+------------------------------------------
+>> <color=#00808090><b> BLUE BOX PHREAKING SOFTWARE </b></color>
+------------------------------------------
+
+>> LOADING MODULE: AUDIO ANALYSIS
+---------------------------------------
+... Importing dependencies: Spectral Processing, Frequency Modulation, Signal Strength... 
+
+>> CALIBRATING: TONE DECODER
+-----------------------------
+... Calibrating to detect 2600 Hz signal... 
+... Adjusting for environmental noise... 
+... Calibration Complete.
+
+>> SETTING UP: DUAL-TONE MULTI-FREQUENCY (DTMF) DECODER
+---------------------------------------------------------
+... Initializing frequency matrix... 
+... Synchronizing timing sequence...
+
+>> CREATING: PHREAKING SEQUENCE
+---------------------------------
+... Aligning frequencies to Bell system tones... 
+... Mapping sequence for long-distance dialing...
+
+>> AWAITING USER INPUT: PASSWORD
+---------------------------------

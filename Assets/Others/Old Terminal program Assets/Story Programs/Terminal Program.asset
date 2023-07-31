@@ -1,0 +1,199 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c96d2257bd4342fcb9525fb04142fc72, type: 3}
+  m_Name: Terminal Program
+  m_EditorClassIdentifier: 
+  programCommands:
+  - rid: 1018593351135657984
+  - rid: 1018593351135657986
+  - rid: 1018593351135657985
+  - rid: 1018593351135657987
+  - rid: 1018593351135657988
+  - rid: 1018593351135657991
+  - rid: 1018593351135657993
+  - rid: 1018593351135657994
+  - rid: 1018593351135657995
+  - rid: 1018593351135657996
+  - rid: 1018593351135657997
+  - rid: 1018593351611449355
+  - rid: 1018593351611449356
+  - rid: 1018593351611449358
+  - rid: 1018593351611449359
+  - rid: 1018593351611449360
+  - rid: 1018593351611449361
+  - rid: 1018593351611449362
+  - rid: 1018593351611449363
+  - rid: 1018593351611449364
+  - rid: 1018593351611449365
+  - rid: 1018593351611449368
+  - rid: 1018593351611449369
+  - rid: 1018593351611449367
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1018593351135657984
+      type: {class: MorpheusText, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        startInNewLine: 1
+        morpheusMassage: Dont hang up.
+        _speed: 1
+        prefixTagColor: 2
+    - rid: 1018593351135657985
+      type: {class: SimpleText, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        startInNewLine: 0
+        text: I need your help.
+        typeSpeed: 0
+    - rid: 1018593351135657986
+      type: {class: PauseCommand, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        pauseTime: 0.3
+    - rid: 1018593351135657987
+      type: {class: ClearScreenCommand, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        pauseBeforeClearingTheScreen: 2
+    - rid: 1018593351135657988
+      type: {class: MorpheusText, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        startInNewLine: 1
+        morpheusMassage: We need to convert this payphone into a Musical machine.
+        _speed: 1
+        prefixTagColor: 2
+    - rid: 1018593351135657991
+      type: {class: ClearScreenCommand, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        pauseBeforeClearingTheScreen: 0.5
+    - rid: 1018593351135657993
+      type: {class: StylizedText, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        startInNewLine: 1
+        text: Find the serial number.
+        typeSpeed: 1
+        textColor: 3
+    - rid: 1018593351135657994
+      type: {class: PauseCommand, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        pauseTime: 2
+    - rid: 1018593351135657995
+      type: {class: StylizedText, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        startInNewLine: 0
+        text: It should be written somewhere on this payphone.
+        typeSpeed: 1
+        textColor: 0
+    - rid: 1018593351135657996
+      type: {class: PauseCommand, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        pauseTime: 0.6
+    - rid: 1018593351135657997
+      type: {class: UserInputCommand, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        inputPrompt:
+          rid: 1018593351135657998
+        secondTryInputPrompt: Somethings wrong, Try Again
+        oncePasswordIsEntered:
+          rid: -2
+        expectedPassword: 123456
+        inputTextColor: 3
+        validationRoutine: {fileID: 11400000, guid: 4e763ce16d798405282909218c84c991, type: 2}
+    - rid: 1018593351135657998
+      type: {class: StylizedText, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        startInNewLine: 1
+        text: 'Once you find it, Enter it here: '
+        typeSpeed: 1
+        textColor: 0
+    - rid: 1018593351611449355
+      type: {class: ClearScreenCommand, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        pauseBeforeClearingTheScreen: 0
+    - rid: 1018593351611449356
+      type: {class: MorpheusText, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        startInNewLine: 1
+        morpheusMassage: 'Got it!
+
+'
+        _speed: 1
+        prefixTagColor: 2
+    - rid: 1018593351611449358
+      type: {class: StylizedText, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        startInNewLine: 1
+        text: You can now open the phone's maintenance box.
+        typeSpeed: 1
+        textColor: 0
+    - rid: 1018593351611449359
+      type: {class: StylizedText, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        startInNewLine: 1
+        text: This panel sends and receives audio data, and transforms it into sound.
+        typeSpeed: 1
+        textColor: 0
+    - rid: 1018593351611449360
+      type: {class: ClearScreenCommand, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        pauseBeforeClearingTheScreen: 2
+    - rid: 1018593351611449361
+      type: {class: StylizedText, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        startInNewLine: 1
+        text: Right now, all the components are set to make the phone's normal dial
+          sounds.
+        typeSpeed: 1
+        textColor: 0
+    - rid: 1018593351611449362
+      type: {class: StylizedText, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        startInNewLine: 1
+        text: We will
+        typeSpeed: 1
+        textColor: 0
+    - rid: 1018593351611449363
+      type: {class: StylizedText, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        startInNewLine: 0
+        text: rewire
+        typeSpeed: 1
+        textColor: 3
+    - rid: 1018593351611449364
+      type: {class: StylizedText, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        startInNewLine: 0
+        text: them into a different setup.
+        typeSpeed: 1
+        textColor: 0
+    - rid: 1018593351611449365
+      type: {class: NewlineCommand, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        numberOfLines: 2
+    - rid: 1018593351611449367
+      type: {class: StylizedText, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        startInNewLine: 1
+        text: Try pressing some numbers to see it
+        typeSpeed: 1
+        textColor: 3
+    - rid: 1018593351611449368
+      type: {class: ClearScreenCommand, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        pauseBeforeClearingTheScreen: 1
+    - rid: 1018593351611449369
+      type: {class: MorpheusText, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        startInNewLine: 1
+        morpheusMassage: I am generating a script that can show you a visual preview
+          of the phones Dial tone.
+        _speed: 1
+        prefixTagColor: 2

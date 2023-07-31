@@ -1,0 +1,75 @@
+﻿/* Collapsed Marker State -> Corresponds to GUIStyle.normal */
+JumpMarker
+{
+    width: 18px;
+    height: 18px;
+    background-image: resource("Assets/Scripts/Editor/Stylesheets/imgs/jumpTo_collapsed.png");
+}
+
+/* Active Marker State -> Corresponds to GUIStyle.onNormal */
+JumpMarker:checked
+{
+    background-image: resource("Assets/Scripts/Editor/Stylesheets/imgs/jumpTo_normal.png");
+}
+/*/Users/jonatanvider/Documents/PAGMAR_V2_FOLDER/PAGMAR_V2(builtin_Render_Pipeline)/Assets/Scripts/Editor/Stylesheets/imgs
+
+/* Selected Marker State -> Corresponds to GUIStyle.onFocused */
+JumpMarker:hover:focus:checked
+{
+    background-image: resource("Assets/Scripts/Editor/Stylesheets/imgs/jumpTo_selected.png");
+}
+
+
+
+
+
+
+/* Collapsed Marker State -> Corresponds to GUIStyle.normal */
+DestinationMarker
+{
+    width: 18px;
+    height: 18px;
+    background-image: resource("Assets/Scripts/Editor/Stylesheets/imgs/destination_collapsed.png");
+}
+
+/* Active Marker State -> Corresponds to GUIStyle.onNormal */
+DestinationMarker:checked
+{
+    background-image: resource("Assets/Scripts/Editor/Stylesheets/imgs/destination_normal.png");
+}
+
+/* Selected Marker State -> Corresponds to GUIStyle.onFocused */
+DestinationMarker:hover:focus:checked
+{
+    background-image: resource("Assets/Scripts/Editor/Stylesheets/imgs/destination_selected.png");
+}
+
+
+
+
+
+
+
+
+
+
+
+PlayValidationBasedOnInputSignal
+{
+    width: 18px;
+    height: 18px;
+    background-image: resource("Assets/Scripts/Editor/Stylesheets/imgs/jumpTo_collapsed.png");
+}
+
+/* Active Marker State -> Corresponds to GUIStyle.onNormal */
+PlayValidationBasedOnInputSignal:checked
+{
+    background-image: resource("Assets/Scripts/Editor/Stylesheets/imgs/jumpTo_normal.png");
+}
+/*/Users/jonatanvider/Documents/PAGMAR_V2_FOLDER/PAGMAR_V2(builtin_Render_Pipeline)/Assets/Scripts/Editor/Stylesheets/imgs
+
+/* Selected Marker State -> Corresponds to GUIStyle.onFocused */
+PlayValidationBasedOnInputSignal:hover:focus:checked
+{
+    background-image: resource("Assets/Scripts/Editor/Stylesheets/imgs/jumpTo_selected.png");
+}

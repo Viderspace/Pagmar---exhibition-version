@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68da823e8f804e5fb8c0535b3b785e2f, type: 3}
+  m_Name: Cutoff Line Threshold
+  m_EditorClassIdentifier: 
+  DefaultValue: 1
+  ValuePreview: 0
+  Variable: {fileID: 11400000, guid: 06908a108a82d4c269f622c7f80a7de6, type: 2}
+  HighThreshold: 0.95
+  LowThreshold: 0.001

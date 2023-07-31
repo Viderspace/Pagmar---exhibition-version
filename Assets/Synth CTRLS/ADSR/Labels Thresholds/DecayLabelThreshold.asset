@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f63c35ca53c4f44b4e05c31081a9c79, type: 3}
+  m_Name: DecayLabelThreshold
+  m_EditorClassIdentifier: 
+  DefaultValue: 1
+  ValuePreview: 1
+  Variable: {fileID: 11400000, guid: 630749bfa83f24cf0a6877c6261941f5, type: 2}
+  Threshold: 0.2

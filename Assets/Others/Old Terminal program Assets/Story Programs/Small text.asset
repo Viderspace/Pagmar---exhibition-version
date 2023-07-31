@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c96d2257bd4342fcb9525fb04142fc72, type: 3}
+  m_Name: Small text
+  m_EditorClassIdentifier: 
+  programCommands:
+  - rid: 1018593451474944009
+  references:
+    version: 2
+    RefIds:
+    - rid: 1018593451474944009
+      type: {class: StylizedText, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        startInNewLine: 0
+        text: Hello Neo
+        typeSpeed: 2
+        textColor: 0

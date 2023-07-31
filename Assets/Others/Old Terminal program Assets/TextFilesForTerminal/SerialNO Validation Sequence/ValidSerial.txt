@@ -1,0 +1,17 @@
+
+>> INITIATING: AUTHENTICATION PROCESS
+---------------------------------------
+... Comparing hashed input with stored hash... 
+
+>> <color=#3aaa35>PASSWORD VERIFIED</color>
+----------------------
+... Access  <color=#3aaa35>Granted</color>...
+
+>> INITIATING: PHONE LINE SEIZURE SEQUENCE
+--------------------------------------------
+... Sending 2600 Hz tone... 
+... Intercepting connection... 
+
+>> <color=#3aaa35>HACKING PROCESS COMPLETED </color>
+-----------------------------
+... You now have control over the payphone system...

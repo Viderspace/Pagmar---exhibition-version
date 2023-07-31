@@ -1,0 +1,177 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2121281607
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2121281611}
+  - component: {fileID: 2121281608}
+  - component: {fileID: 2121281609}
+  - component: {fileID: 2121281610}
+  m_Layer: 0
+  m_Name: Note Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2121281611
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121281607}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 812477583851780056}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2121281608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121281607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a146637f2ecb4d43b412543a59087a09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalPitchMode: {fileID: 11400000, guid: 146fca96a5f96456fab22e6849738bd1, type: 2}
+  telephonePlayer: {fileID: 2121281610}
+  musicalMidiPlayer: {fileID: 2121281609}
+  NoteOnVariable: {fileID: 11400000, guid: 62fadcb2c2d6f47079026babd3a0b136, type: 2}
+--- !u!114 &2121281609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121281607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95518476c91e4e78af084a7b54a91478, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  channel: 0
+  velocity: 0.9
+  NoteOnVariable: {fileID: 11400000, guid: 62fadcb2c2d6f47079026babd3a0b136, type: 2}
+--- !u!114 &2121281610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121281607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1d52d9b194c4699bd80251363164144, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NoteOnVariable: {fileID: 11400000, guid: 62fadcb2c2d6f47079026babd3a0b136, type: 2}
+--- !u!1 &812477583851780058
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 812477583851780056}
+  - component: {fileID: 812477583851780050}
+  - component: {fileID: 812477583851780055}
+  - component: {fileID: 812477583851780054}
+  m_Layer: 0
+  m_Name: -----  Reaktor Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &812477583851780056
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812477583851780058}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2121281611}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &812477583851780050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812477583851780058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9b766fd65c411d96d5535a86b3351f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FilterOnOffSwitch: {fileID: 11400000, guid: 5577a28e032314f17aa0ee603b73456e, type: 2}
+  CutoffOffset: {fileID: 11400000, guid: dd8431c5fa669433babeed5970de344f, type: 2}
+  CvModListener: {fileID: 11400000, guid: 1859b1addf0a644eb9e6870bd08e85ef, type: 2}
+  waveShapeVariable: {fileID: 11400000, guid: b43693a6ae12648029e03bd4bde2a810, type: 2}
+  AdsrOnOffSwitch: {fileID: 11400000, guid: 3a1176b0323b8486f857a0c5aa788766, type: 2}
+  globalAdsr: {fileID: 11400000, guid: 97208847592394add9a67d3a3ba5059c, type: 2}
+  noteManager: {fileID: 2121281608}
+--- !u!114 &812477583851780055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812477583851780058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 464088183d2a1484ab8fb64e356c9f5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _autoConnect: 1
+  _closeOnPause: 1
+  _mapBundle: {fileID: 0}
+  _workInEditor: 1
+  _localHostMode: 0
+  _localPortMode: 2
+  _localReceiver: {fileID: 812477583851780054}
+  _localHost: 192.168.5.227
+  _localPort: 7000
+  _remoteHost: 127.0.0.1
+  _remotePort: 8005
+  _useBundle: 0
+--- !u!114 &812477583851780054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812477583851780058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbba286dc10e549b2bdec947ef8dbd3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _autoConnect: 1
+  _closeOnPause: 0
+  _mapBundle: {fileID: 0}
+  _workInEditor: 1
+  _localHostMode: 0
+  _localHost: 127.0.0.3
+  _localPort: 8010

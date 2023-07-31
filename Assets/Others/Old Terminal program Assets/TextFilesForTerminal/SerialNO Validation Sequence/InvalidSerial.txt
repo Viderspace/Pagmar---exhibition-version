@@ -1,0 +1,19 @@
+
+>> INITIATING: AUTHENTICATION PROCESS
+---------------------------------------
+... Comparing hashed input with stored hash... 
+
+>> <color=red>PASSWORD VERIFICATION FAILED</color>
+
+----------------------------------
+... <color=red>Access Denied...</color>
+
+>> TERMINATING: HACKING PROCESS
+--------------------------------
+... Shutting down audio analysis module... 
+... Deactivating DTMF decoder... 
+
+>> <color=red>HACKING PROCESS FAILED</color>
+--------------------------
+... Please reinitialize the hacking process with valid credentials...
+

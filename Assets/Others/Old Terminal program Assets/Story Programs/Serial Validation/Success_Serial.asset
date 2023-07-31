@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c96d2257bd4342fcb9525fb04142fc72, type: 3}
+  m_Name: Success_Serial
+  m_EditorClassIdentifier: 
+  programCommands:
+  - rid: 1018593351135657999
+  - rid: 1018593351135658000
+  - rid: 1018593351135658001
+  references:
+    version: 2
+    RefIds:
+    - rid: 1018593351135657999
+      type: {class: PauseCommand, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        pauseTime: 0.5
+    - rid: 1018593351135658000
+      type: {class: ReadTextFromFile, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        file: {fileID: 4900000, guid: cb533f4a130041699fa078506e3c13e6, type: 3}
+    - rid: 1018593351135658001
+      type: {class: PauseCommand, ns: Story.Terminal.ContentCreation.Terminal_Operations, asm: Assembly-CSharp}
+      data:
+        pauseTime: 0.5
