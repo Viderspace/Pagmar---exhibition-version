@@ -2,6 +2,7 @@ using System;
 using Inputs;
 using Reaktor_Communication;
 using Scriptable_Objects;
+using Synth_Variables;
 using TMPro;
 using UnityEngine;
 
@@ -18,6 +19,8 @@ namespace Kernel.Tests
         public KeyCode togglePitchModeKey = KeyCode.P;
         public KeyCode RedialKeyCode = KeyCode.Z;
 
+       [SerializeField] private FloatVariable MaxAmp;
+
         private bool _isFilterUiVisible;
         private bool _isSequencerUiVisible;
         private bool _isAdsrVisible;
@@ -33,6 +36,7 @@ namespace Kernel.Tests
 
         private void Start()
         {
+            Screen.SetResolution(1286,1926, FullScreenMode.Windowed);
             _isAdsrVisible = false;
             _isFilterUiVisible = false;
             _pitchMode = SynthController.PitchMode.Telephone;
@@ -139,7 +143,7 @@ namespace Kernel.Tests
             time = .5f;
             SynthSnapshot snapshot = new SynthSnapshot(Singleton.Instance.SynthController);
             
-            synthDataText.text = snapshot.Print() + "\n \n" + Time.deltaTime +" deltaTime ,"+  1.0f / Time.deltaTime + " fps";
+            synthDataText.text = snapshot.Print() + "\n \n" +"Max Amp: " + MaxAmp.Value;
         }
     }
 }

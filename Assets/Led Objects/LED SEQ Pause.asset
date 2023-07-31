@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ee90d4592ce412c8861ce1e428edeb1, type: 3}
   m_Name: LED SEQ Pause
   m_EditorClassIdentifier: 
-  pin: 12
+  pin: 3
   DefaultState: 0
   StatePreview: 1
   OptionalBind: {fileID: 11400000, guid: a98812a430d9b49958af7ce4bfd61110, type: 2}

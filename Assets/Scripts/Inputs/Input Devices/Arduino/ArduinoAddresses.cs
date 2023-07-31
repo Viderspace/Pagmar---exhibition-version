@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Scriptable_Objects;
 using UnityEngine;
@@ -133,10 +134,18 @@ namespace Inputs.Scriptable_Objects
 
         private void SetPotentiometer(string info)
         {
-            var split = info.Split(Delimiter, 2);
-            string potentiometerName = split[0];
-            float value = float.Parse(split[1]);
-            PotentiometerNotifiers[potentiometerName](value);
+            try
+            {
+                var split = info.Split(Delimiter, 2);
+                string potentiometerName = split[0];
+                float value = float.Parse(split[1]);
+                PotentiometerNotifiers[potentiometerName](value);
+            }
+            catch(Exception e)
+            {
+                Debug.Log("Error parsing potentiometer value: " + info);
+            }
+  
         }
 
         private void InvokeKeypadEvent(string info)

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ee90d4592ce412c8861ce1e428edeb1, type: 3}
   m_Name: LED SEQ Record
   m_EditorClassIdentifier: 
-  pin: 10
+  pin: 4
   DefaultState: 0
-  StatePreview: 0
+  StatePreview: 1
   OptionalBind: {fileID: 11400000, guid: 1dbaf6255e58647c8b529e3b6b2e3942, type: 2}

@@ -131,7 +131,7 @@ namespace Synth.Oscillator.OscilloScope.Components
         private ComputeShader computeShader;
         // [field: SerializeReference] private ;
 
-        [field: SerializeReference] private float MaxAmp { get; set; }
+        [SerializeField] private FloatVariable MaxAmp;
         // [field: SerializeReference] private float MinAmp { get; set; }
 
         #endregion
@@ -142,6 +142,7 @@ namespace Synth.Oscillator.OscilloScope.Components
         private AudioLevelTracker _reaktorStream;
     
         private AudioBuffer _audioBuffer;
+        private SimplerAudioBuffer _simplerAudioBuffer;
 
         private ComputeBuffer _buffer;
         [SerializeField] private  RenderTexture _renderTexture;
@@ -158,18 +159,11 @@ namespace Synth.Oscillator.OscilloScope.Components
 
 
         #endregion
-
-
-        private void OnValidate()
-        {
-            computeShader.SetFloat("lineWidth", lineWidth);
-            computeShader.SetFloat("amp", MaxAmp);
-            computeShader.SetVector("lineColor", lineColor);
-        }
-
+        
 
         void Awake()
         {
+            _simplerAudioBuffer = new SimplerAudioBuffer(sampleSize, MaxAmp);
             // Create a new buffer with the same size as the audio samples
 
             _reaktorStream = GetComponent<AudioLevelTracker>();
@@ -183,6 +177,7 @@ namespace Synth.Oscillator.OscilloScope.Components
             // };
             _renderTexture.enableRandomWrite = true;
             // _renderTexture.Create();
+            computeShader.SetVector("lineColor", lineColor);
             computeShader.SetInt("size", sampleSize);
             computeShader.SetFloat("lineWidth", lineWidth);
             computeShader.SetFloat("amp", 0);
@@ -209,7 +204,8 @@ namespace Synth.Oscillator.OscilloScope.Components
         void RefreshShader()
         {
             // Set the buffer data
-            _buffer.SetData(_audioBuffer._CleanBuff);
+            _buffer.SetData(_simplerAudioBuffer.GetBuffer());
+            // _buffer.SetData(_audioBuffer._CleanBuff);
 
             // Set the shader parameters
             computeShader.SetBuffer(_kernel, "audioData", _buffer);
@@ -218,8 +214,8 @@ namespace Synth.Oscillator.OscilloScope.Components
             // var minmaxAmp = _audioBuffer.GetMinMaxAmp();
             // MinAmp = minmaxAmp.x;
             // MaxAmp = minmaxAmp.y;
-            MaxAmp = _audioBuffer.GetMaxAmp();
-            computeShader.SetFloat("amp", MaxAmp);
+            MaxAmp.Value = _audioBuffer.GetMaxAmp();
+            computeShader.SetFloat("amp", MaxAmp.Value);
 
             // Execute the shader
             computeShader.Dispatch(_kernel, sampleSize / 8, sampleSize / 8, 1);
@@ -228,7 +224,9 @@ namespace Synth.Oscillator.OscilloScope.Components
 
         private void Prepare()
         {
-            _audioBuffer.Push(Stream.audioDataSlice);
+            var slice = Stream.audioDataSlice;
+            _simplerAudioBuffer.PushAndProcess(slice);
+            _audioBuffer.Push(slice);
             _audioBuffer.ZSync();
         }
 

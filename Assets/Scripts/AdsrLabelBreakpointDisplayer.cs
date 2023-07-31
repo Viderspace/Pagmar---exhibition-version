@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Synth_Variables.Scripts;
 using TMPro;
 using UnityEngine;

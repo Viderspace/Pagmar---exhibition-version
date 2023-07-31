@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Story.Terminal.ContentCreation.Terminal_Operations;
 using UnityEngine;
@@ -25,7 +26,30 @@ namespace Utils
         public static Color Pink;
         public static Color Red;
 
-        
+        private void Awake()
+        {
+            BGBlue = bgBlue;
+            Colors[UiColorAutoUpdate.PaletteColor.BGBlue] = BGBlue;
+               
+            Green = green;
+            Colors[UiColorAutoUpdate.PaletteColor.Green] = Green;
+
+            WhiteYellowish = whiteYellowish;
+            Colors[UiColorAutoUpdate.PaletteColor.WhiteYellowish] = WhiteYellowish;
+            
+            GreyBlue = greyBlue;
+            Colors[UiColorAutoUpdate.PaletteColor.GreyBlue] = GreyBlue;
+            
+            LightBlue = lightBlue;
+            Colors[UiColorAutoUpdate.PaletteColor.LightBlue] = LightBlue;
+            
+            Pink = pink;
+            Colors[UiColorAutoUpdate.PaletteColor.Pink] = Pink;
+            
+            Red = red;
+            Colors[UiColorAutoUpdate.PaletteColor.Red] = Red;
+        }
+
         // [Header("Low Opacity Colors")]
       //  [SerializeField]
       private Color lowOpacityBlue;

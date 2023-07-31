@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ee90d4592ce412c8861ce1e428edeb1, type: 3}
   m_Name: LED NoteOn
   m_EditorClassIdentifier: 
-  pin: 7
+  pin: 2
   DefaultState: 0
   StatePreview: 0
   OptionalBind: {fileID: 11400000, guid: 62fadcb2c2d6f47079026babd3a0b136, type: 2}
