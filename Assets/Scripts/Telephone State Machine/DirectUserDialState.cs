@@ -1,14 +1,12 @@
 using System.Collections;
-using DefaultNamespace;
-using FX___Animations.Glitch_Effect;
 using Inputs;
-using Kernel;
+using Runtime.Kernel.Telephone_State_Machine;
 using Scriptable_Objects;
 using Synth_Variables.Native_Types;
 using TMPro;
 using UnityEngine;
 
-namespace Runtime.Kernel.Telephone_State_Machine
+namespace Telephone_State_Machine
 {
     /// <summary>
     /// This state is entered when the user has actively picked up the phone (with no ringing prior)
@@ -60,6 +58,7 @@ namespace Runtime.Kernel.Telephone_State_Machine
         #region Override methods
         public override void Enter()
         {
+            System.currState = StateMachine.CurrState.DIRECT_USER_DIAL;
             base.Enter();
             _cheatCodes.Reset();
             _telephoneUi.Value = true;
@@ -86,7 +85,13 @@ namespace Runtime.Kernel.Telephone_State_Machine
                 _timerTask = null;
             }
         }
-        
+
+        protected override void OnPhoneHangup()
+        {
+            base.OnPhoneHangup();
+            _telephoneUi.ResetToDefault();
+        }
+
         protected override void OnKeypadPress(Keypad key)
         {
             base.OnKeypadPress(key);
@@ -108,7 +113,6 @@ namespace Runtime.Kernel.Telephone_State_Machine
             
             if (cheatCodeDetected)
             {
-                GlitchController.OnGlitchTriggered(true);
                 System.SwitchState(System.SandboxState);
             }
         }

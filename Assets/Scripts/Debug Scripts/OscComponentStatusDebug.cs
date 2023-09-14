@@ -38,7 +38,7 @@ public class OscComponentStatusDebug : MonoBehaviour
     {
         return $"<color={(Rok ? "green" : "red")}>" +
                (Rok ? "Connected" : "Disconnected") +
-               " | port " + _receiver.LocalPort + " </color>";
+               " | port " + _receiver.LocalPort + " </color> local host " + _receiver.LocalHost + " started: " + _receiver.IsStarted;
     }
     void FixedUpdate()
     {

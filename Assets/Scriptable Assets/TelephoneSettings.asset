@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a27c092d9233469db1a08b3842fdfc68, type: 3}
   m_Name: TelephoneSettings
   m_EditorClassIdentifier: 
-  serialNumber: 3200320032003200
+  serialNumber: 3200360030003000
   ringingSound: {fileID: 8300000, guid: 50883b1f5f2104c70ab94facc15d0687, type: 3}
-  debugMode: 1
+  debugMode: {fileID: 11400000, guid: 8cb5cf6867029480ba791e98fff4cbe3, type: 2}

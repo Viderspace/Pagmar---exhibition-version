@@ -1,9 +1,10 @@
 using System.Collections;
+using Runtime.Kernel.Telephone_State_Machine;
 using Synth_Variables.Native_Types;
 using TMPro;
 using UnityEngine;
 
-namespace Runtime.Kernel.Telephone_State_Machine
+namespace Telephone_State_Machine
 {
     /**
      * Simulates the phone ringing
@@ -67,6 +68,7 @@ namespace Runtime.Kernel.Telephone_State_Machine
         #region Overrides 
         public override void Enter()
         {
+            System.currState = StateMachine.CurrState.RINGING;
             base.Enter();
             _ringingUi.Value = true;
             _timerTask = new Task(RingTime());
@@ -82,6 +84,12 @@ namespace Runtime.Kernel.Telephone_State_Machine
             }
             System.SetRingingSound(false);
 
+        }
+        
+        protected override void OnPhoneHangup()
+        {
+            base.OnPhoneHangup();
+            _ringingUi.Value = true;
         }
         
         #endregion

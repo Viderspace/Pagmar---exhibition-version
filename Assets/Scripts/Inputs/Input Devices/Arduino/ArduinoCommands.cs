@@ -34,7 +34,7 @@ namespace Inputs.Input_Devices.Arduino
             public string GetMassage()
             {
                 string massage =
-                    $"{(commandType == CmdType.RegisterLed ? REGISTER_CMD : TOGGLE_CMD)},{ledPin},{(turnOn ? (byte) 1 : (byte) 0)}";
+                    $"{(commandType == CmdType.RegisterLed ? REGISTER_CMD : TOGGLE_CMD)},{ledPin},{(turnOn ? (byte) 0 : (byte) 1)}";
                 return massage;
             }
         }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Inputs;
+using Reaktor_Communication;
 using Scriptable_Objects;
 using Synth_Variables.Native_Types;
 using Synth_Variables.Scripts;
@@ -336,10 +337,15 @@ namespace Synth.Sequencer
         }
 
         public static event Action<int> NoteTrigger;
+        public bool kickOn = true;
 
         private void OnNoteTrigger(int timeStamp)
         {
             NoteTrigger?.Invoke(timeStamp);
+            if (kickOn && (timeStamp % 4 == 0))
+        {
+            ReaktorController.Instance.SendKick();
+        }
         }
         
         

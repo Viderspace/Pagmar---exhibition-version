@@ -39,14 +39,31 @@ namespace Runtime.Timeline.Synth_Signals
         {
             synthController.SequencerOnOffSwitch.Value = true;
         }
+
+        public void LoadFilterModule()
+        {
+            synthController.FilterOnOffSwitch.Value = false;
+        }
         
-        
-        
-        
-        
-        
+        public void Bypass2600HZChallengeIfNeeded()
+        {
+            if (synthController.FilterOnOffSwitch.Value == false) synthController.FilterOnOffSwitch.Value = true;
+            
+            if (Cutoff2600HzSequence.Instance != null && Cutoff2600HzSequence.Instance.SequenceIsRunning)
+            {
+                Cutoff2600HzSequence.Instance.ExitSequence();
+            }
+        }
+
+        public void ActivateAllSynthModules() => synthController.JumpToSynthToSandBoxMode();
+
+
+
+
+
+
         #endregion
 
-        
+
     }
 }

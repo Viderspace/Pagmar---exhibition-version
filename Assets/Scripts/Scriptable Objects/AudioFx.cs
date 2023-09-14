@@ -63,6 +63,16 @@ namespace Scriptable_Objects
             SetAudioSourceVolume();
         }
 
+        private void Awake()
+        {
+            SetAudioSourceVolume();
+        }
+
+        private void OnEnable()
+        {
+            SetAudioSourceVolume();
+        }
+
         private void SetAudioSourceVolume()
         {
             if (AudioFxPlayer.Instance == null) return;

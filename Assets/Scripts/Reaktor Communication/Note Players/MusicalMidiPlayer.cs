@@ -28,11 +28,14 @@ namespace Reaktor_Communication.Note_Players
         {
             MidiBridge.instance.Warmup();
         }
-        
+
+ 
         
         private IEnumerator PlayNoteAtLengthRoutine(Keypad key, float length)
         {
+     
             OnKeypadDown(key);
+        
             
             var noteDuration = length;
             while (noteDuration > 0)

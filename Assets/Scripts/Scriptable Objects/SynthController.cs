@@ -324,7 +324,23 @@ namespace Scriptable_Objects
             if (!SequencerOnOffSwitch.Value) SequencerOnOffSwitch.Value = true;
             if (!FilterOnOffSwitch.Value) FilterOnOffSwitch.Value = true;
             if (!AdsrOnOffSwitch.Value) AdsrOnOffSwitch.Value = true;
-            if (ActivePitchMode.Value == PitchMode.Telephone)ActivePitchMode.Value = PitchMode.MusicalNotes;
+            if (ActivePitchMode.Value == PitchMode.Telephone) ActivePitchMode.Value = PitchMode.MusicalNotes;
+        }
+
+        public void JumpToSynthToSandBoxMode()
+        {
+            Debug.Log("Synth Jumped to Sandbox Mode and toggled off and on the modules");
+            OscillatorOnOffSwitch.Value = false;
+            SequencerOnOffSwitch.Value = false;
+            FilterOnOffSwitch.Value = false;
+            AdsrOnOffSwitch.Value = false;
+            // ActivePitchMode.Value = PitchMode.Telephone;
+            OscillatorOnOffSwitch.Value = true;
+            SequencerOnOffSwitch.Value = true;
+            FilterOnOffSwitch.Value = true;
+            AdsrOnOffSwitch.Value = true;
+
+            if (ActivePitchMode.Value == PitchMode.Telephone) ActivePitchMode.Value = PitchMode.MusicalNotes;
         }
 
         #endregion
@@ -338,5 +354,4 @@ namespace Scriptable_Objects
 
         #endregion
     }
-
 }

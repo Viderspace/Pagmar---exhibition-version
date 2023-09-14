@@ -68,7 +68,7 @@ namespace Synth.Sequencer
 
             GameObject newButton = Instantiate(buttonPrefab, gridPosition, Quaternion.identity, parent.transform);
             newButton.transform.SetAsFirstSibling();
-            newButton.GetComponent<SequencerButton>().Init(x, y, sequencerMode);
+            newButton.GetComponent<SequencerButton>().Init(x, 11-y, sequencerMode);
             newButton.name = $"{_noteNames[60 + y]} Button{x}";
         }
     }

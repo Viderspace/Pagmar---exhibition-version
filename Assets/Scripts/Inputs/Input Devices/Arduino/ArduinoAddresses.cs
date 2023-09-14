@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Scriptable_Objects;
+using Synth_Variables.Native_Types;
 using UnityEngine;
 
 namespace Inputs.Scriptable_Objects
@@ -8,6 +10,7 @@ namespace Inputs.Scriptable_Objects
     [CreateAssetMenu(fileName = "Arduino Address Manager", menuName = "Arduino/Address Manager", order = 0)]
     public class ArduinoAddresses : ScriptableObject
     {
+        [SerializeField] private ToggleVariable ListenToCVInput;
         public const char Delimiter = ',';
         public const string POT_CODE = "POT";
         public const string KEYPAD_CODE = "KEY";
@@ -38,7 +41,6 @@ namespace Inputs.Scriptable_Objects
             string code = split[0].Trim();
             string command = split[1].Trim();
 
-
             switch (code)
             {
                 case PHONE_CODE:
@@ -56,16 +58,52 @@ namespace Inputs.Scriptable_Objects
                 case "WAV":
                     InvokeWaveShape(command);
                     break;
-                    
+                case "CV":
+                    InvokeCVTrig(command);
+                    break;
+                case "DIST":
+                    InvokeDistanceSensorRead(command);
+                    break;
             }
         }
-        
+
+        private void InvokeDistanceSensorRead(string command)
+        {
+            // String msg = (String)(newRead == HIGH ? "NEAR" : "FAR") + " ";
+            // Serial.println("DIST," + msg);
+            if (command == "NEAR")
+            {
+                InputManager.OnDistanceSensorDetected(true);
+            }
+            
+            if(command == "FAR")
+            {
+                InputManager.OnDistanceSensorDetected(false);
+            }
+        }
+
+   
+
+        private void InvokeCVTrig(string info)
+        {
+            if (!ListenToCVInput.Value) return;
+
+            var split = info.Split(Delimiter, 2);
+            string isOn = split[1].Trim();
+            if (isOn[0] == '1')
+            {
+                CVTriggered?.Invoke();
+                ListenToCVInput.Value = false;            }
+        }
+
+
+        public static event Action CVTriggered;
+
         private float lastButtonPressTime = 0;
-        private const float debounceTime = 0.2f;
 
         private void InvokeWaveShape(string shape)
         {
-            Debug.Log("RECEIVED WAVE SHAPE: "+ shape);
+            Debug.Log("RECEIVED WAVE SHAPE: " + shape);
             switch (shape)
             {
                 case "SINE":
@@ -82,9 +120,7 @@ namespace Inputs.Scriptable_Objects
                     break;
             }
         }
-        
-        
-        
+
         public readonly Dictionary<string, ButtonAction> ButtonNotifiers =
             new Dictionary<string, ButtonAction>()
             {
@@ -98,10 +134,6 @@ namespace Inputs.Scriptable_Objects
 
         private void InvokeButtonEvent(string buttonName)
         {
-     
-            lastButtonPressTime += Time.deltaTime;
-            if (lastButtonPressTime < debounceTime) return;
-            lastButtonPressTime = 0;
             buttonName = buttonName.Trim();
             ButtonNotifiers[buttonName]?.Invoke();
         }
@@ -115,6 +147,7 @@ namespace Inputs.Scriptable_Objects
         }
 
         public delegate void PotentiometerAction(float value);
+
         public delegate void ButtonAction();
 
         private readonly Dictionary<string, PotentiometerAction> PotentiometerNotifiers =
@@ -137,38 +170,54 @@ namespace Inputs.Scriptable_Objects
             try
             {
                 var split = info.Split(Delimiter, 2);
-                string potentiometerName = split[0];
-                float value = float.Parse(split[1]);
+                string potentiometerName = split[0].Trim();
+                float value = float.Parse(split[1].Trim());
                 PotentiometerNotifiers[potentiometerName](value);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                Debug.Log("Error parsing potentiometer value: " + info);
+                Debug.Log("Error parsing msg (pot): " + info + "exception: " + e.Message);
             }
-  
         }
 
         private void InvokeKeypadEvent(string info)
         {
             var split = info.Split(Delimiter, 2);
-            string key = (split[0]).Trim();
+            string key = (split[0]);
             string actionType = split[1].Trim();
-            
-            if (key[0] == RE_DIAL_KEY && actionType == KEY_DOWN)
+            if (key[0] == RE_DIAL_KEY)
             {
-                InputManager.OnKeypadClearCurrentStep();
+                if (actionType == KEY_DOWN)
+                {
+                    // this is a bypass for faulty cv circuit
+                    if (ListenToCVInput.Value)
+                    {
+                        CVTriggered?.Invoke();
+                        ListenToCVInput.Value = false;   
+                    }
+                    InputManager.OnKeypadClearCurrentStep();
+                }
                 return;
             }
+            Debug.Log("Key Pressed: " + Keypad.GetKeyFromChar(key[0]));
+ 
+
+
 
             switch (actionType)
             {
                 case KEY_UP:
-                    InputManager.OnKeypadButtonPressed(Keypad.GetKeyFromChar(key[0]));
-                    break;
-                case KEY_DOWN:
                     InputManager.OnKeypadButtonReleased(Keypad.GetKeyFromChar(key[0]));
                     break;
+                case KEY_DOWN:
+                    InputManager.OnKeypadButtonPressed(Keypad.GetKeyFromChar(key[0]));
+                    break;
             }
+        }
+
+        private static void OnCvTriggered()
+        {
+            CVTriggered?.Invoke();
         }
     }
 }

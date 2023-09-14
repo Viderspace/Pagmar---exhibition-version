@@ -40,8 +40,28 @@ namespace Synth
         [SerializeField][Range(0,1)] private float DecayCtrl;
         [SerializeField][Range(0,1)] private float SustainCtrl;
         [SerializeField][Range(0,1)] private float ReleaseCtrl;
-        
-        
+
+        private void Start()
+        {
+            ValidationUtility.SafeOnValidate(() => { OscillatorOnOff.Value = OscillatorToggle; });
+            ValidationUtility.SafeOnValidate(() => { OscillatorOnOff.Value = OscillatorToggle; });
+            ValidationUtility.SafeOnValidate(() => { SequencerOnOff.Value = SequencerToggle; });
+            ValidationUtility.SafeOnValidate(() => { FilterOnOff.Value = FilterToggle; });
+            ValidationUtility.SafeOnValidate(() => { AdsrOnOff.Value = AdsrToggle; });
+            ValidationUtility.SafeOnValidate(() => { MasterVolume.Value = MasterVolCtrl; });
+            ValidationUtility.SafeOnValidate(() => { Octave.Value = OctaveCtrl; });
+            ValidationUtility.SafeOnValidate(() => { pitchModeVariable.Value = pitchModeCtrl; });
+            ValidationUtility.SafeOnValidate(() => { ActiveWaveShape.Value = WaveShapeCtrl; });
+            ValidationUtility.SafeOnValidate(() => { SequencerMode.Value = SequencerModeCtrl; });
+            ValidationUtility.SafeOnValidate(() => { Bpm.Value = BpmCtrl; });
+            ValidationUtility.SafeOnValidate(() => { CutoffOffset.Value = CutoffOffsetCtrl; });
+            ValidationUtility.SafeOnValidate(() => { Attack.Value = AttackCtrl; });
+            ValidationUtility.SafeOnValidate(() => { Decay.Value = DecayCtrl; });
+            ValidationUtility.SafeOnValidate(() => { Sustain.Value = SustainCtrl; });
+            ValidationUtility.SafeOnValidate(() => { Release.Value = ReleaseCtrl; });
+            
+        }
+
 #if UNITY_EDITOR
 
         private void OnValidate()

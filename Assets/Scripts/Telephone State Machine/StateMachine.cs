@@ -1,24 +1,43 @@
-using DefaultNamespace;
+using System;
+using System.Collections;
 using FX___Animations.Glitch_Effect;
 using Reaktor_Communication;
 using Runtime.Kernel.System;
+using Runtime.Kernel.Telephone_State_Machine;
 using Scriptable_Objects;
 using Synth_Variables.Native_Types;
-using Telephone_State_Machine;
 using TMPro;
 using UnityEngine;
 
-namespace Runtime.Kernel.Telephone_State_Machine
+namespace Telephone_State_Machine
 {
     public class StateMachine : MonoBehaviour
     {
+        public static StateMachine Instance;
+
+        public enum CurrState
+        {
+            IDLE,
+            RINGING,
+            DIRECT_USER_DIAL,
+            INTERACTION,
+            SANDBOX,
+            DEBUG
+        }
+        public CurrState currState = CurrState.IDLE;
+        
+        public static event Action<CurrState> StateChanged;
         #region Inspector
+
+        [SerializeField] public bool DistanceSensorMode;
         [SerializeField] private string statePreview;
-      [SerializeField]  private ToggleVariable IdleTelephoneScreen;
+        [SerializeField]  private ToggleVariable IdleTelephoneScreen;
       [SerializeField]  private ToggleVariable DirectUserDialScreen;
       [SerializeField]  private ToggleVariable RingingWarningScreen;
-        
-       // [SerializeField] private GlitchController glitchController;
+      [SerializeField] private ToggleVariable InteractionScreen;
+      [SerializeField] private GameObject BlackGlitchBG;
+
+      // [SerializeField] private GlitchController glitchController;
         [SerializeField] private TelephoneSettings settings;
         [SerializeField] private TimelineController timelineController;
         #endregion
@@ -50,6 +69,8 @@ namespace Runtime.Kernel.Telephone_State_Machine
 
         public void Awake()
         {
+            Instance = this;
+            BlackGlitchBG.SetActive(false);
             AudioPlayer = gameObject.AddComponent<AudioSource>();
             AudioPlayer.clip = Settings.ringingSound;
             InitializeStateMachine();
@@ -64,6 +85,23 @@ namespace Runtime.Kernel.Telephone_State_Machine
             }
         }
 
+        public void EnterSandboxMode()
+        {
+            StartCoroutine(OramGoodbyeGlitch());
+        }
+        private IEnumerator OramGoodbyeGlitch()
+        {
+            GlitchController.OnGlitchTriggered(true);
+            yield return new WaitForSeconds(0.4f);
+            BlackGlitchBG.SetActive(true);
+            CurrentState = SandboxState;
+            statePreview = SandboxState.StateName;
+            CurrentState.Enter(); 
+            yield return new WaitForSeconds(2.5f);
+            Singleton.Instance.AudioFx.Play(AudioFx.FX.InsertNewLine);
+            BlackGlitchBG.SetActive(false);
+        }
+
         #endregion
 
         #region Methods
@@ -72,7 +110,7 @@ namespace Runtime.Kernel.Telephone_State_Machine
             InitState = new InitState(this, statusWindow, IdleTelephoneScreen);
             RingingState = new RingingState(this, statusWindow, RingingWarningScreen);
             DirectUserDialState = new DirectUserDialState(this, statusWindow, DirectUserDialScreen);
-            InteractionState = new InteractionState(this, statusWindow);
+            InteractionState = new InteractionState(this, statusWindow, InteractionScreen);
             SandboxState = new SandboxState(this, statusWindow);
             DebugState = new DebugState(this, statusWindow);
             CurrentState = (settings.debugMode? DebugState : InitState);
@@ -85,7 +123,10 @@ namespace Runtime.Kernel.Telephone_State_Machine
             CurrentState = newState;
             statePreview = newState.StateName;
             CurrentState.Enter();
+            StateChanged?.Invoke(currState);
         }
+
+   
 
         public void SetRingingSound(bool on)
         {

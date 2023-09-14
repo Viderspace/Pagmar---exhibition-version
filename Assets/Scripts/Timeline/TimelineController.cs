@@ -1,3 +1,4 @@
+using System.Collections;
 using Inputs;
 using Scriptable_Objects;
 using Timeline_Extentions;
@@ -48,9 +49,17 @@ namespace Runtime.Kernel.System
 
         public void MoveToEnd()
         {
-            playableDirector.Pause();
-            playableDirector.time = playableDirector.duration - 4f;
+            // playableDirector.time = playableDirector.duration - 25f;
+            // playableDirector.Pause();
+            StartCoroutine(MoveToEndAndPause());
+        }
 
+        IEnumerator MoveToEndAndPause()
+        {
+            playableDirector.time = 1117f;
+            playableDirector.Play();
+            yield return new WaitForSeconds(1f);
+            playableDirector.Pause();
         }
 
  
@@ -90,12 +99,14 @@ namespace Runtime.Kernel.System
         #endregion
 
         #region Special Events
+        
+        public void HoldAndStartSequencerCodeChallenge() => specialTimelineEvents.HoldAndStartSequencerCodeChallenge();
+        
+        public void HoldUntilRecordButtonIsPressed() => specialTimelineEvents.HoldUntilRecordButtonIsPressed();
 
         public void  HoldUntilKeypadIsPressed() => specialTimelineEvents.HoldUntilKeypadIsPressed();
         
         public void HoldUntilReDialedKeyIsPressed() => specialTimelineEvents.HoldUntilRedialKeyIsPressed();
-        
-        public void HoldUntilRecordButtonIsPressed() => specialTimelineEvents.HoldUntilRecordButtonIsPressed();
         
         public void HoldUntilFilterIsEnabled() => specialTimelineEvents.HoldUntilFilterIsEnabled();
         
@@ -104,6 +115,10 @@ namespace Runtime.Kernel.System
         public void EnableAdsrOn() => specialTimelineEvents.EnableAdsrOn();
 
         public void HoldUntilAdsrIsMatched() => specialTimelineEvents.HoldUntilAdsrIsMatched();
+        
+        public void HoldAndWaitForCvTrigger() => specialTimelineEvents.HoldAndWaitForCvTrigger();
+        
+        public void EnterSandboxMode() => specialTimelineEvents.EnterSandboxMode();
 
         #endregion
 

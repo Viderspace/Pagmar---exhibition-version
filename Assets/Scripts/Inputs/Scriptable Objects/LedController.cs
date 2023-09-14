@@ -43,6 +43,8 @@ namespace Inputs.Scriptable_Objects
             {
                 OptionalBind.ValueChanged += (b) => { State = b; };
             }
+            ResetToDefault();
+            
         }
 
         public void ResetToDefault()

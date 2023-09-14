@@ -1,17 +1,17 @@
 using System.Collections;
 using FX___Animations.Glitch_Effect;
+using Inputs.Input_Devices.Arduino;
+using Runtime.Kernel.Telephone_State_Machine;
 using Synth_Variables.Native_Types;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using Utils;
 
-namespace Runtime.Kernel.Telephone_State_Machine
+namespace Telephone_State_Machine
 {
     public class InitState : BaseState
     {
         #region Fields & Properties
-        
+        DistanceSensor _distanceSensor;
         private Task _timerTask;
         private ToggleVariable _telephoneIdleUi;
 
@@ -51,9 +51,19 @@ namespace Runtime.Kernel.Telephone_State_Machine
         
         public override void Enter()
         {
+            System.currState = StateMachine.CurrState.IDLE;
+            GlitchController.OnGlitchTriggered(false);
             base.Enter();
             _telephoneIdleUi.Value = true;
-            _timerTask = new Task(SetTimerForRinging());
+            if (System.DistanceSensorMode)
+            {
+                DistanceSensor.DistanceDetected += StartRingingWhenSensorIsTriggered;
+                DebugWindow("State: " + this.GetType().Name + " | " + "Distance Sensor Mode");
+            }
+            else
+            {
+                _timerTask = new Task(SetTimerForRinging());
+            }
         }
 
         public override void Exit()
@@ -61,12 +71,30 @@ namespace Runtime.Kernel.Telephone_State_Machine
             base.Exit();
             _telephoneIdleUi.Value = false;
             if (TimerIsActive) _timerTask.Stop();
+            if (System.DistanceSensorMode)
+            {
+                DistanceSensor.DistanceDetected -= StartRingingWhenSensorIsTriggered;
+            }
+        }
+        
+        
+        private void StartRingingWhenSensorIsTriggered()
+        {
+            System.SwitchState(System.RingingState);
+            
         }
         
         protected override void OnPhonePickup()
         {
+
             System.SwitchState(System.DirectUserDialState);
         }
+
+        // protected override void OnPhoneHangup()
+        // {
+        //     return;
+        // }
+
         #endregion
     }
 }

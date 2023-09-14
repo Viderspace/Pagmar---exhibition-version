@@ -40,6 +40,8 @@ namespace ASCII_Animations
 
         private void Awake()
         {
+            frameColorHex = "#" + ColorUtility.ToHtmlStringRGB(frameColor);
+            fillColorHex = "#" + ColorUtility.ToHtmlStringRGB(waveColor);
             textMeshPro = GetComponent<TextMeshProUGUI>();
             if (textMeshPro == null)
             {

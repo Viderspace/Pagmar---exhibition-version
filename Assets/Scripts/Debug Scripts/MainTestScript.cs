@@ -1,8 +1,7 @@
-using System;
 using Inputs;
-using Reaktor_Communication;
 using Scriptable_Objects;
 using Synth_Variables;
+using Synth_Variables.Native_Types;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,6 +10,7 @@ namespace Kernel.Tests
 {
     public class MainTestScript : MonoBehaviour
     {
+        public ToggleVariable debugMode;
         public KeyCode phonePickupKey = KeyCode.UpArrow;
         public KeyCode phoneHangupKey = KeyCode.DownArrow;
         public KeyCode showHideDebugWindowKey = KeyCode.D;
@@ -19,6 +19,8 @@ namespace Kernel.Tests
         public KeyCode showHideAdsrKey = KeyCode.E;
         public KeyCode togglePitchModeKey = KeyCode.P;
         public KeyCode RedialKeyCode = KeyCode.Z;
+        public KeyCode EnableADSRKey = KeyCode.A;
+
 
        [SerializeField] private FloatVariable MaxAmp;
 
@@ -97,11 +99,18 @@ namespace Kernel.Tests
 
                 }
             }
+
+            if (Input.GetKeyDown(EnableADSRKey))
+            {
+                bool toggleADSR = !Singleton.Instance.SynthController.AdsrOnOffSwitch.Value;
+                InputManager.OnUpdateAdsrIsActive(toggleADSR);
+            }
             
             
             if (Input.GetKeyDown(showHideDebugWindowKey))
             {
-                debugWindow.SetActive(!debugWindow.activeSelf);
+                debugMode.Value = !debugMode.Value;
+                debugWindow.SetActive(debugMode.Value);
             }
 
             if (Input.GetKeyDown(togglePitchModeKey))

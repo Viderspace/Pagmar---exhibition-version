@@ -7,8 +7,10 @@ namespace Telephone_State_Machine
 {
     public class SandboxState: BaseState
     {
+        private StateMachine _system;
         public SandboxState(StateMachine system, TMP_Text debugText) : base(system, debugText)
         {
+            _system = system;
         }
 
         public override string StateName
@@ -25,16 +27,20 @@ namespace Telephone_State_Machine
         public override void Enter()
         {
             base.Enter();
-            Singleton.Instance.SynthController.SetSynthToSandBoxMode();
+            System.currState = StateMachine.CurrState.SANDBOX;
+            GlitchController.OnGlitchTriggered(true);
             TimelineController.Instance.MoveToEnd();
+            Singleton.Instance.SynthController.JumpToSynthToSandBoxMode();
             base.DebugWindow("Sandbox State");
         }
         
         public override void Exit()
         {
             base.Exit();
-            GlitchController.OnGlitchTriggered(false);
-
+            // GlitchController.OnGlitchTriggered(false);
+            // _system.isInSandboxMode.Value = false;
         }
+        
+        
     }
 }

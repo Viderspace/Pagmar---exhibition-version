@@ -1,39 +1,56 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.IO.Ports;
 using System.Threading;
 using Inputs.Input_Devices.Arduino;
 using Inputs.Scriptable_Objects;
+using TMPro;
 using UnityEngine;
 
 
 public class ArduinoTransmitter : MonoBehaviour
 {
     public static ArduinoTransmitter Instance;
+    public TMP_Text debugText;
     // NOTICE: The current address is valid when the board is connected to the 'Programming Port'
     // and into my 'Transcend' USB hub, which is connected
     // to the leftmost USB port (right next to the Headphone jack) in my Macbook Pro.
     // Other addresses may be invalid
-    private const string boardAddress = "/dev/cu.usbmodem11201";
+    [SerializeField]private  string boardAddress = "modem";
 
     // NOTICE: Delay time must be the same as the delay time in the Arduino code!
     public static int arduinoDelay = 25;
-    public int baudRate = 115200;
+    public int baudRate = 9600;
 
     // lED Controller Objects
     [SerializeField] private List<LedController> ledControllers;
 
     private Thread _thread;
     private static SerialPort _serialPort;
+    private bool feedIsAlive;
     
     private static readonly ArduinoCommands commandQueue = new ArduinoCommands();
     
+    [SerializeField] private TMP_InputField inputField;
+
+    private void OnInputTextChanged(string newBoardName)
+    {
+        boardAddress = newBoardName;
+        ClosePort();
+        Connect();
+    }
+
     #region LED API
     public static void RegisterLed(byte LEDPin) => commandQueue.RegisterLed(LEDPin);
-    
-    private static void SetLed(byte LEDPin, bool turnOn) =>commandQueue.SetLed(LEDPin, turnOn);
+
+    private static void SetLed(byte LEDPin, bool turnOn)
+    {
+        commandQueue.SetLed(LEDPin, turnOn);
+        var debugSentMsg = new ArduinoCommands.ProtocolCommand(ArduinoCommands.CmdType.ToggleLed, LEDPin, turnOn).GetMassage();
+        if(Instance.debugText!=null ) Instance.debugText.text = "Arduino Received Message: (" + debugSentMsg+ ")";
+
+    }
     
     #endregion
     
@@ -43,6 +60,7 @@ public class ArduinoTransmitter : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        inputField.onValueChanged.AddListener(OnInputTextChanged);
         Connect();
         // var Receiver = GetComponent<ArduinoReceiver>();
         
@@ -56,8 +74,8 @@ public class ArduinoTransmitter : MonoBehaviour
         yield return new WaitForSeconds(2f);
         foreach (var led in ledControllers)
         {
-            led.Setup();
             led.StateChanged += SetLed;
+            led.Setup();
             yield return null;
         }
 
@@ -118,9 +136,17 @@ public class ArduinoTransmitter : MonoBehaviour
 
     public void Connect()
     {
+        string deviceName = "";
+        foreach (var name in SerialPort.GetPortNames())
+        {
+            if (name.Contains(boardAddress))
+            {
+                deviceName = name;
+            }
+        }
         try
         {
-            _serialPort = new SerialPort(boardAddress, baudRate);
+            _serialPort = new SerialPort(deviceName, baudRate);
             _serialPort.ReadTimeout = arduinoDelay;
             _serialPort.WriteTimeout = arduinoDelay;
             _serialPort.Open();
@@ -128,30 +154,21 @@ public class ArduinoTransmitter : MonoBehaviour
         catch (Exception e)
         {
             print("Arduino is not connected: " + e.Message);
+            if (debugText != null) debugText.text = "Arduino Transmitter Has failed";
             DestroyImmediate(this);
         }
+        
+        if (_serialPort.IsOpen && debugText != null)
+        {
+            debugText.text = "Arduino Transmitter: No Signal sent";
+        }
 
     }
-
-    private static string ReadData(int timeout = 50)
-    {
-        _serialPort.ReadTimeout = timeout;
-        string msg;
-        try
-        {
-            // msg = _serialPort.ReadLine();
-            var all = _serialPort.ReadExisting();
-            return all;
-        }
-        catch (TimeoutException)
-        {
-            return null;
-        }
-    }
-
+    
     static void ThreadLoop()
     {
-        if (!_serialPort.IsOpen) return;
+      
+        if (_serialPort == null || !_serialPort.IsOpen) return;
         for (;;)
         {
 
@@ -162,15 +179,7 @@ public class ArduinoTransmitter : MonoBehaviour
                 print("Sending to arduino: ("+protocolMsg+")");
             }
             
-
-            var incomingMassage = ReadData();
-            if (!string.IsNullOrEmpty(incomingMassage))
-            {
-                print("Received: (" + incomingMassage + ") from Arduino");
-                OnDataReceived(incomingMassage);
-               
-            }
-            Thread.Sleep(arduinoDelay/2);
+            Thread.Sleep(arduinoDelay);
         }
     }
 
@@ -186,13 +195,7 @@ public class ArduinoTransmitter : MonoBehaviour
 
     #endregion
     
-    public static event Action<string> DataReceived;
-    
-    public static void OnDataReceived(string data)
-    {
-        DataReceived?.Invoke(data);
-    }
-    
+
 }
 
 

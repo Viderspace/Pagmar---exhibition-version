@@ -11,6 +11,7 @@ namespace Synth.Synth_UI_Utilities
     [ExecuteInEditMode]
     public class HideRevealSynthModule : MonoBehaviour
     {
+        [SerializeField] public string moduleName;
         [SerializeField] public ToggleVariable OnOffSwitch;
         [SerializeField] public List<UiToggleObject> ComponentsToToggle = new List<UiToggleObject>();
 
@@ -31,6 +32,7 @@ namespace Synth.Synth_UI_Utilities
 
         private void ToggleOnOff(bool on)
         {
+            print("ToggleOnOff UI Event: " +(on? "ON " : "OFF ") + moduleName);
             if (Application.isPlaying)
             {
                 StartCoroutine(GradualReveal(on));

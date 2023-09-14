@@ -48,7 +48,10 @@ namespace Utils
             UpdateColors();
         }
 
-
+        private void Awake()
+        {
+            UpdateColors();
+        }
     }
 
     [Serializable]

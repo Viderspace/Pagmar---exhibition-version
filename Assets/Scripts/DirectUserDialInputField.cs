@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Inputs;
@@ -61,6 +60,13 @@ public class DirectUserDialInputField : MonoBehaviour
     {
         toggleVariable.ValueChanged -= Activate;
     }
+
+    // private void SelfDectivate()
+    // {
+    //     toggleVariable.Value
+    // }
+    
+    
     
     
     private void Activate(bool on)

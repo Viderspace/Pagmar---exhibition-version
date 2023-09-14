@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Inputs;
+using Synth_Variables.Native_Types;
 using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -14,17 +15,18 @@ namespace Scriptable_Objects
         [SerializeField] private List<char> serialNumber = new List<char>();
         
         [SerializeField]public AudioClip ringingSound;
-        [SerializeField][Tooltip("Allows us to enter playmode with the state machine disabled, pressing Enter key to toggle it ")] 
-        public bool debugMode;
+        [SerializeField]
+        [Tooltip("Allows us to enter playmode with the state machine disabled, pressing Enter key to toggle it ")]
+        public ToggleVariable debugMode;
         #endregion
         
-        private const float AvgIdleTimeUntilRinging = 12f;
+        private const float AvgIdleTimeUntilRinging = 60*15f;
         
         public const float UserDialingTimeUntilInteraction = 10f;
         
         public float GetRandomIdleTimeUntilRinging()
         {
-            return debugMode ? 2 :AvgIdleTimeUntilRinging +Random.Range(-5f, 5f);
+            return debugMode.Value ? 2 : AvgIdleTimeUntilRinging;
         }
         
         public List<Keypad> MakeSerialNumber()

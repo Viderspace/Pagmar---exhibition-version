@@ -11,7 +11,7 @@ using Timeline_Extentions;
 using UnityEngine;
 using UnityEngine.Playables;
 
-public class SequencerCodeValidator : MonoBehaviour , INotificationReceiver
+public class SequencerCodeValidator : MonoBehaviour, INotificationReceiver
 {
     public bool isActiveDebug = false;
     public int ScanNumber = 0;
@@ -26,45 +26,120 @@ public class SequencerCodeValidator : MonoBehaviour , INotificationReceiver
         Keypad.Silence, Keypad.Eight, Keypad.Zero, Keypad.Silence
     };
 
+    public enum State
+    {
+        WaitingForUserToPressPlay,
+        AnalyzingCode,
+        Inactive
+    }
+
+    private State _state = State.Inactive;
+
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
         }
-        
+
         if (Code.Count != 16)
         {
             Debug.LogError("Sequencer Code is not 16 digits long (SequencerCodeValidator script)");
             return;
         }
+
+        _state = State.Inactive;
     }
 
     public void Enter()
     {
-        SequencerMode.ValueChanged += StartListeningToCode;
         isActiveDebug = true;
+        _state = State.WaitingForUserToPressPlay;
+
+        SequencerMode.ValueChanged += ListenToPlayButton;
+    }
+
+    private void ListenToPlayButton(SynthController.SequencerState sequencerState)
+    {
+        if (_state != State.WaitingForUserToPressPlay) return;
+        // User has to press the Play button after inserting the code,
+        if (sequencerState != SynthController.SequencerState.Running) return;
+        
+        SequencerMode.ValueChanged -= ListenToPlayButton;
+        StartAnalyzingCode();
+        
+    }
+    
+    void StartAnalyzingCode()
+    {
+        _state = State.AnalyzingCode;
         ScanNumber = 0;
         passcodeIsAccurate = true;
-    }
-
-    public void Exit()
-    {
-        SequencerMode.ValueChanged += StartListeningToCode;
-        SequencerController.NoteTrigger -= ListenToSequencerCode;
-        isActiveDebug = false;
-        ScanNumber = 0;
-        passcodeIsAccurate = false;
-    }
-
-    private void StartListeningToCode(SynthController.SequencerState sequencerState)
-    {
-        print("Code Validator received: " + sequencerState);
-        if (sequencerState != SynthController.SequencerState.Running) return;
-
-        // User has to press the Play button after inserting the code,
         // Starting to check if the code is correct
-        SequencerController.NoteTrigger += ListenToSequencerCode;
+        SequencerController.NoteTrigger += ReceiveNoteCodePlayed;
+    }
+
+    private void ReceiveNoteCodePlayed(int timeStamp)
+    {
+        if (!CurrentNoteIsCorrect(timeStamp)) passcodeIsAccurate = false;
+
+        if (timeStamp == 15)
+        {
+            if (ScanNumber <2) // Play One more loop 
+            {
+                ScanNumber++;
+            }
+            else
+            {
+                JumpToResponse(passcodeIsAccurate); 
+            }
+        }
+    }
+
+    private void JumpToResponse(bool codeIsCorrect)
+    {
+        SequencerController.NoteTrigger -= ReceiveNoteCodePlayed;
+
+        if (codeIsCorrect) JumpToSuccessResponseAndExit();
+        else JumpToFailResponseAndLoopback();
+    }
+    
+    private void JumpToFailResponseAndLoopback()
+    {
+        // skipping to bad code response
+        TimelineController.Instance.SkipToAndPlay(lastJumpMarker.destinationMarkerList[0]);
+        // resetting the values
+        Exit();
+        SequencerMode.Value = SynthController.SequencerState.Recording;
+        Enter();
+    }
+
+    private void JumpToSuccessResponseAndExit()
+    {
+        // skipping to good code response
+        TimelineController.Instance.SkipToAndPlay(lastJumpMarker.destinationMarkerList[1]);
+        Exit();
+    }
+
+    private void Exit()
+    {
+        if (_state == State.Inactive) return;
+        SequencerMode.ValueChanged -= ListenToPlayButton;
+        SequencerController.NoteTrigger -= ReceiveNoteCodePlayed;
+        _state = State.Inactive; 
+        ScanNumber = 0; 
+        passcodeIsAccurate = true;
+
+    }
+
+    private void OnEnable()
+    {
+        InputManager.PhoneHangup += Exit;
+    }
+
+    private void OnDisable()
+    {
+        InputManager.PhoneHangup -= Exit;
     }
 
     private bool CheckCurrentNote(int index, Keypad keypad)
@@ -72,7 +147,7 @@ public class SequencerCodeValidator : MonoBehaviour , INotificationReceiver
         return Code[index] == keypad;
     }
 
-    private bool ValidateCurrentStep(int timeStamp)
+    private bool CurrentNoteIsCorrect(int timeStamp)
     {
         var buttons = SequencerButton.ButtonPool[timeStamp];
 
@@ -96,71 +171,25 @@ public class SequencerCodeValidator : MonoBehaviour , INotificationReceiver
         return false;
     }
 
-    private void ListenToSequencerCode(int timeStamp)
-    {
 
-        if (!ValidateCurrentStep(timeStamp))
+
+    [SerializeField] public JumpMarker lastJumpMarker;
+
+    public void OnNotify(Playable origin, INotification notification, object context)
+    {
+        var jumpMarker = notification as JumpMarker;
+        if (jumpMarker == null) return;
+
+        if (jumpMarker.initSequence)
         {
-            passcodeIsAccurate = false;
+            // Save the last jump marker to late jump to the section based on the validation result     
+            lastJumpMarker = jumpMarker;
+            Enter();
         }
 
-        if (timeStamp == 15)
+        else if (jumpMarker.numberOfDestinations == 1) // Jump to retry again
         {
-            if (ScanNumber == 0)
-            {
-                StartCoroutine(passcodeIsAccurate ? nameof(CodeIsCorrect) : nameof(CodeIsIncorrect));
-            }
-            ScanNumber++;
+            TimelineController.Instance.SkipToAndPlay(jumpMarker.destinationMarkerList[0]);
         }
     }
-    
-  private  IEnumerator CodeIsIncorrect()
-    {
-        yield return new WaitWhile(() => ScanNumber < 3);
-        // skipping to bad code response
-        TimelineController.Instance.SkipToAndPlay(lastJumpMarker.destinationMarkerList[0]);
-        // resetting the values
-        Exit();
-        SequencerMode.Value = SynthController.SequencerState.Recording;
-        Enter();
-        yield return null;
-    }
-  private IEnumerator CodeIsCorrect()
-    {
-        yield return new WaitWhile(() => ScanNumber < 3);
-        // skipping to good code response
-        TimelineController.Instance.SkipToAndPlay(lastJumpMarker.destinationMarkerList[1]);
-        // exiting
-        Exit();
-        yield return null;
-    }
-  
-  
-  
-  
-  [SerializeField] public JumpMarker lastJumpMarker;
-  
-  
-  public void OnNotify(Playable origin, INotification notification, object context)
-  {
-      var jumpMarker = notification as JumpMarker;
-      if (jumpMarker == null) return;
-            
-      if (jumpMarker.initSequence)
-      {
-          // Save the last jump marker to late jump to the section based on the validation result     
-          lastJumpMarker = jumpMarker;
-          Enter();
-      }
-
-      else if (jumpMarker.numberOfDestinations == 1) // Jump to retry again
-      {
-          TimelineController.Instance.SkipToAndPlay(jumpMarker.destinationMarkerList[0]);
-      }
-      
-  
-
-  }
-
 }
-

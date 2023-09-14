@@ -1,9 +1,12 @@
 using System.Collections;
 using Inputs;
+using Inputs.Scriptable_Objects;
 using Runtime.Kernel.System;
+using Runtime.Kernel.Telephone_State_Machine;
 using Synth_Variables.Native_Types;
 using Synth_Variables.Scripts;
 using Synth.ADSR;
+using Telephone_State_Machine;
 using UnityEngine;
 using UnityEngine.UI.Extensions;
 using Utils;
@@ -39,21 +42,12 @@ namespace Scriptable_Objects
             TimelineController.Instance.ResumeTimeline();
         }
 
-        public void HoldUntilRecordButtonIsPressed()
+        public void HoldAndStartSequencerCodeChallenge()
         {
             TimelineController.Instance.playableDirector.Pause();
             SequencerCodeValidator.Instance.Enter();
-            SequencerIsInRecordMode.ValueChanged += RecordButtonPressed;
         }
-
-        private void RecordButtonPressed(bool isInRecordMode)
-        {
-            if (isInRecordMode)
-            {
-                SequencerIsInRecordMode.ValueChanged -= RecordButtonPressed;
-                TimelineController.Instance.ResumeTimeline();
-            }
-        }
+        
 
         public void HoldUntilFilterIsEnabled()
         {
@@ -101,6 +95,40 @@ namespace Scriptable_Objects
         public void AdsrIsMatched()
         {
             TimelineController.Instance.ResumeTimeline();
+        }
+
+        [SerializeField] private ToggleVariable ListenToCVInput;
+        public void HoldAndWaitForCvTrigger()
+        {
+            TimelineController.Instance.playableDirector.Pause();
+            ListenToCVInput.Value = true;
+            ArduinoAddresses.CVTriggered += ReceiveCvTrigger;
+        }
+        
+        public void ReceiveCvTrigger()
+        {
+            TimelineController.Instance.ResumeTimeline();
+            ArduinoAddresses.CVTriggered -= ReceiveCvTrigger;
+        }
+
+        public void HoldUntilRecordButtonIsPressed()
+        {
+            TimelineController.Instance.PauseTimeline();
+            SequencerIsInRecordMode.ValueChanged += RecordButtonWasPressed;
+        }
+
+        private void RecordButtonWasPressed(bool isPressed)
+        {
+            if (isPressed)
+            {
+                TimelineController.Instance.ResumeTimeline();
+
+            }
+        }
+
+        public void EnterSandboxMode()
+        {
+            StateMachine.Instance.EnterSandboxMode();
         }
     }
 }

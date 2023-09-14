@@ -62,8 +62,11 @@ namespace Inputs
         public static event Action<Keypad> KeypadButtonPressed;
         public static event Action<Keypad> KeypadButtonReleased;
         
+        
         public static event Action KeypadClearCurrentStep; // The Redial button
         
+        public static event Action<bool> DistanceDetected;
+
 
         #endregion
 
@@ -226,6 +229,12 @@ namespace Inputs
         }
 
         #endregion
+        
+        
+        public static void OnDistanceSensorDetected(bool value)
+        {
+            DistanceDetected?.Invoke(value);
+        }
 
         #endregion
 

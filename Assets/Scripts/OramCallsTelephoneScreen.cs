@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Inputs;
 using Synth_Variables.Native_Types;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,11 +22,19 @@ public class OramCallsTelephoneScreen : MonoBehaviour
     private void OnEnable()
     {
         toggleVariable.ValueChanged += ActivateUI;
+        InputManager.PhoneHangup += ResetToInit;
     }
     
     private void OnDisable()
     {
         toggleVariable.ValueChanged -= ActivateUI;
+        InputManager.PhoneHangup -= ResetToInit;
+    }
+
+    void ResetToInit()
+    {
+        toggleVariable.ResetToDefault();
+        ActivateUI(toggleVariable.DefaultValue);
     }
 
     private void Start()

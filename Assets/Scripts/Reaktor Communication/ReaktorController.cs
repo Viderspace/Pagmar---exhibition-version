@@ -47,6 +47,7 @@ namespace Reaktor_Communication
             _receiver = GetComponent<OSCReceiver>();
             
             Receiver.Bind("/ADSR/CVOUT", ReceiveCvMod);
+            
         }
         
         private void ReceiveCvMod(OSCMessage message)
@@ -168,6 +169,11 @@ namespace Reaktor_Communication
         {
             if (pauseStatus) EnableAdsr(false);
             else if (AdsrOnOffSwitch.Value == true) EnableAdsr(true);
+        }
+
+        public void SendKick()
+        {
+            SendFloat("/Kick", 1);
         }
     }
 

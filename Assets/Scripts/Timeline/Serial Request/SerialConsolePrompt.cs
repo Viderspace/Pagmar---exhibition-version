@@ -1,3 +1,4 @@
+using System;
 using Inputs;
 using Runtime.Timeline.Main_terminal_Track;
 using Scriptable_Objects;
@@ -50,7 +51,16 @@ namespace Runtime.Timeline.Serial_Input_Routine
                 textComponent.text = _enterSerialPrompt + _serialInputTextField.GetCodeWithLastKey(false);
             }
         }
-        
+
+        private void Awake()
+        {
+            if (_serialInputTextField != null)
+            {
+                _serialInputTextField.MonoSpacingCode = monoSpacingCode;
+                textComponent.text = _enterSerialPrompt + _serialInputTextField.GetCodeWithLastKey(false);
+            }
+        }
+
         private SerialRequestManager _serialRequestManager;
         
         private void Start()

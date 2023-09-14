@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Decay
   m_EditorClassIdentifier: 
   DefaultValue: 0.65
-  ValuePreview: 0.08
+  ValuePreview: 0.14
   Min: 0
   Max: 1

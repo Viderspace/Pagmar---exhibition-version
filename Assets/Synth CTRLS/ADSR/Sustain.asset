@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Sustain
   m_EditorClassIdentifier: 
   DefaultValue: 0.5
-  ValuePreview: 0.13
+  ValuePreview: 0.12
   Min: 0
   Max: 1

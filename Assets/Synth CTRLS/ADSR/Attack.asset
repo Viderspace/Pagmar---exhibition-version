@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Attack
   m_EditorClassIdentifier: 
   DefaultValue: 0.3
-  ValuePreview: 0.08
+  ValuePreview: 0.3
   Min: 0
   Max: 1

@@ -1,7 +1,8 @@
 using Inputs;
+using Runtime.Kernel.Telephone_State_Machine;
 using TMPro;
 
-namespace Runtime.Kernel.Telephone_State_Machine
+namespace Telephone_State_Machine
 {
     public class BaseState
     {

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Inputs;
+using Synth_Variables.Native_Types;
 using TMPro;
 using UnityEngine;
 using Utils;
@@ -10,10 +11,10 @@ using Utils;
 public class ConsoleStatusBar : MonoBehaviour
 {
     public static ConsoleStatusBar Instance { get; private set; }
-
+    public ToggleVariable isInSandboxMode;
     public TMP_Text textComponent;
     public Color initWhiteColor = Color.white;
-    public string afterSerialEnteredColor => DesignPalette.TextColors[DesignPalette.TextColor.LightBlue];
+    public string afterSerialEnteredColor => DesignPalette.BGBlueHex;
     
         // private string initStatus = "<Remote Desktop>"; 
     public string oramHeader = "<0ram>";
@@ -49,6 +50,12 @@ public class ConsoleStatusBar : MonoBehaviour
     {
         textComponent.text = RenderText(status, color);
     }
+
+   public void EnterSandboxMode()
+    {
+
+            SetStatus("Synth Mode", DesignPalette.BGBlue);
+    }
     
     public enum WarningColor
     {
@@ -74,6 +81,9 @@ public class ConsoleStatusBar : MonoBehaviour
     {
         textComponent.text += " " + RenderText(warning, warningColorMap[warningColor]);
     }
+    
+
+
 
 
     private string RenderText(string header, Color color)
@@ -97,6 +107,12 @@ public class ConsoleStatusBar : MonoBehaviour
     {
        
         AddWarning("Security Alert <Inspection>", WarningColor.Red);
+    }
+
+    public void SecurityDisabled()
+    {
+        textComponent.text = RenderText(oramHeader, afterSerialEnteredColor);
+        textComponent.text += " "+ RenderText("Security Disabled", DesignPalette.BGBlueHex);
     }
 
     

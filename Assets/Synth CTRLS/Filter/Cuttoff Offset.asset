@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Cuttoff Offset
   m_EditorClassIdentifier: 
   DefaultValue: 0
-  ValuePreview: 0
+  ValuePreview: 0.7
   Min: 0
   Max: 1

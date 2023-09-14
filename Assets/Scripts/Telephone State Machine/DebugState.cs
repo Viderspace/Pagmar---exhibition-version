@@ -1,3 +1,4 @@
+using Telephone_State_Machine;
 using TMPro;
 
 namespace Runtime.Kernel.Telephone_State_Machine
@@ -9,6 +10,7 @@ namespace Runtime.Kernel.Telephone_State_Machine
 
         public override void Enter()
         {
+            System.currState = StateMachine.CurrState.DEBUG;
             base.Enter();
             base.DebugWindow("Debug State (Press Return key to Exit/Enter Debug State)");
         }

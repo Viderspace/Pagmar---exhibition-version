@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Special Timeline Events
   m_EditorClassIdentifier: 
   SequencerIsInRecordMode: {fileID: 11400000, guid: 1dbaf6255e58647c8b529e3b6b2e3942, type: 2}
+  ListenToCVInput: {fileID: 11400000, guid: 5f815bbfb598f493a8e4efa63aa0fe03, type: 2}
