@@ -6,6 +6,21 @@ This project provides the experience of hacking into a normal-looking payphone a
 
 Utilizing the Unity Engine and a custom sound engine built in Reaktor, this installation explores the intersection of technology and creativity in an immersive, hands-on experience.
 
+![Alt text](Slides/S1.jpeg?raw=true "Page1")
+![Alt text](Slides/S2.jpeg?raw=true "Page2")
+![Alt text](Slides/S3.jpeg?raw=true "Page3")
+![Alt text](Slides/S4.jpeg?raw=true "Page4")
+![Alt text](Slides/S5.jpeg?raw=true "Page5")
+![Alt text](Slides/S6.jpeg?raw=true "Page6")
+![Alt text](Slides/S7.jpeg?raw=true "Page7")
+![Alt text](Slides/S8.jpeg?raw=true "Page8")
+![Alt text](Slides/S9.jpeg?raw=true "Page9")
+![Alt text](Slides/S10.jpeg?raw=true "Page10")
+![Alt text](Slides/S11.jpeg?raw=true "Page11")
+![Alt text](Slides/S12.jpeg?raw=true "Page12")
+![Alt text](Slides/S13.jpeg?raw=true "Page13")
+
+
 ## Features
 - **Interactive Synthesizer**: Transforms a standard payphone into an interactive synthesizer.
 - **Unity Integration**: Utilizes Unity Engine to orchestrate interaction dynamics and sound manipulation.
@@ -24,24 +39,10 @@ git clone https://github.com/Viderspace/Pagmar---exhibition-version.git
 - Activate the installation by interacting with the payphone’s numerical pad.
 - Different keys and sequences trigger various sound effects and synthesizer actions, allowing for a dynamic audio experience.
 
-## Exhibitions and Accolades
-- Featured in Bezalel's Graduate Exhibition.
-- Praised as one of the most innovative projects by department heads at the Hebrew University of Jerusalem and Bezalel Academy.
-- Selected to represent at the global ‘alt.ctrl.GDC’ showcase.
-
-## Contributions
-This project is currently maintained by [Your Name]. For contributions, please fork the repository and submit a pull request, or contact [Your Email] for more details.
-
 ## License
 This project is licensed under the [MIT License](LICENSE.md).
 
 
-# Technical overview:
-![Alt text](Tech_Breif-Slides/Presntation_1.png?raw=true "Page1")
-![Alt text](Tech_Breif-Slides/Presntation_8.png?raw=true "Page8")
-![Alt text](Tech_Breif-Slides/Presntation_9.png?raw=true "Page9")
-![Alt text](Tech_Breif-Slides/Presntation_10.png?raw=true "Page10")
-![Alt text](Tech_Breif-Slides/Presntation_12.png?raw=true "Page12")
-![Alt text](Tech_Breif-Slides/Presntation_13.png?raw=true "Page13")
-![Alt text](Tech_Breif-Slides/Presntation_14.png?raw=true "Page14")
+
+
 
